@@ -7,7 +7,10 @@ const mongoose = require('mongoose');
 const { options } = require('nodemon/lib/config');
 const { status } = require('express/lib/response');
 const User = require('./models/user');
+
 const port_number = process.env.PORT || 3000;
+
+const website = 'Assign';
 
 const app = express()
 
@@ -58,34 +61,43 @@ const isAuthenticated = (req, res, next) => {
 
 app.get('/', (req, res) => {
     // console.log()
-    res.render('index')
+    res.render('index', { website: website })
 })
 
 app.post('/signup', async (req, res) => {
-    let isUser = await User.findOne({ email: req.body.email })
-    if (isUser) {
-        res.redirect('/')
-    } else {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        const user = new User({
-            username: req.body.name,
-            email: req.body.email,
-            password: hashedPassword,
-            group: ''
-        })
-        await user.save()
-            .then(() => {
-                res.redirect('/login');
-                console.log('added user')
+
+    const password = req.body.password.trim()
+    const email = req.body.email.trim()
+    const name = req.body.name.trim()
+    if (password != '' && email != '' && name != '') {
+        let isUser = await User.findOne({ email: email })
+        if (isUser) {
+            res.redirect('/signup')
+        } else {
+            const hashedPassword = await bcrypt.hash(password, 10)
+            const user = new User({
+                username: name,
+                email: email,
+                password: hashedPassword,
+                group: ''
             })
-            .catch(err => {
-                console.log("ERROR", err);
-            })
+            await user.save()
+                .then(() => {
+                    res.redirect('/');
+                    console.log('added user')
+                })
+                .catch(err => {
+                    console.log("ERROR", err);
+                })  
+        }
+    }
+    else {
+        res.redirect('/signup')
     }
 })
 
-app.get('/login', (req, res) => {
-    res.render('login')
+app.get('/signup', (req, res) => {
+    res.render('signup', { website: website })
 })
 
 app.post('/login', async (req, res) => {
@@ -107,7 +119,7 @@ app.post('/login', async (req, res) => {
 })
 
 app.get('/dashboard', isAuthenticated, (req, res) => {
-    res.render('dashboard')
+    res.render('dashboard', { website: website })
 })
 
 app.post('/logout', (req, res) => {

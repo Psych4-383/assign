@@ -1,0 +1,57 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    margin: 10px 200px;
+}
+
+.container .left {
+    background-color: rgba(142, 21, 41, 0.315);
+    width: 50%;
+    height: 100%;
+}
+
+.container .right {
+    background-color: rgb(142, 21, 41);
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+form input {
+    width: 60%;
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid black;
+    margin: 1% 10%;
+    background-color: rgba(255, 255, 255, 0.216);
+    padding-left: 20px;
+    font-size: 16px;
+    outline: none;
+}
+
+#submit-button {
+    background-color: rgb(142, 21, 41);
+    width: 60%;
+    height: 50px;
+    margin: 10% 10% 0% 10%;
+    border: none;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
+form label{
+    margin-top: 20px;
+}

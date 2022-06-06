@@ -1,7 +1,10 @@
 body {
     scroll-behavior: smooth;
     font-family: nunito;
+    margin: 0px;
+    padding: 0px;
 }
+
 nav {
     background-color: rgb(224, 117, 135);
     padding: 30px;
@@ -13,16 +16,24 @@ nav {
 header {
     height: 60vh;
     color: rgb(142, 53, 68);
-    background-color: grey; /* add a background image */
+    background-color: grey;
+    /* add a background image */
     background-size: cover;
-    background-position: bottom ;
+    background-position: bottom;
     background-repeat: no-repeat;
 
 }
 
-header h1{
+header h1 {
     margin: 0px;
     font-family: Nunito;
     padding: 30px;
     font-size: 4rem;
+}
+
+.heading-level-1 {
+    font-family: nunito;
+    font-size: 3rem;
+    text-align: center;
+    color: rgb(142, 21, 41);
 }

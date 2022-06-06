@@ -11,64 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/forms.css">
+    <title>Home | <%= website %>
+    </title>
 
-    <style>
-        .container {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            height: 80vh;
-            margin: 10px 200px;
-        }
-
-        .container .left {
-            background-color: rgba(142, 21, 41, 0.315);
-            width: 50%;
-            height: 100%;
-        }
-
-        .container .right {
-            background-color: rgb(142, 21, 41);
-            width: 50%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
-
-        form input {
-            width: 60%;
-            height: 50px;
-            border: none;
-            border-bottom: 1px solid black;
-            margin: 1% 10%;
-            background-color: rgba(255, 255, 255, 0.216);
-            padding-left: 20px;
-            font-size: 16px;
-        }
-
-        #submit-button {
-            background-color: rgb(142, 21, 41);
-            width: 60%;
-            height: 50px;
-            margin: 10%;
-            border: none;
-            color: white;
-            font-size: 17px;
-            cursor: pointer;
-        }
-
-        #imageLogin {
-            height: 80vh;
-        }
-    </style>
 </head>
 
 <body>
@@ -82,37 +28,36 @@
             <div class="stack" style="animation-delay: 2s;"></div>
         </div>
     </div>
-    <div class="main" style="display: none;">
-        <nav>
+    <nav>
 
-        </nav>
-        <h1 style="font-family: nunito; font-size: 3rem; text-align: center; color:rgb(142, 21, 41);">Sign Up</h1>
-        <div class="container">
-            <div class="left">
-                <form method="post" action="/signup">
-                    <input type="text" placeholder="Enter Username" name="name" id="name">
-                    <input type="email" placeholder="Enter Email" autocomplete="email" name="email" id="email">
-                    <input type="password" placeholder="Enter Password" name="password" id="password">
-                    <button type="submit" id="submit-button">Sign Up</button>
-                </form>
-            </div>
-            <div class="right">
-                <img src="/header_index.jpg" alt="" id="imageLogin">
-            </div>
+    </nav>
+
+    <h1 class="heading-level-1">Login Page</h1>
+    <div class="container">
+        <div class="left">
+            <form action="/login" method="post">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Enter Email">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Enter Password">
+                <button id="submit-button">Login</button>
+                <sup>&#9432; You may be redirected back to this page if credentials are incorrect</sup>
+                <p>Don't have an account? <a href="/signup">Sign Up</a> for one!</p>
+            </form>
         </div>
-        
+        <div class="right" style="background-image: url(/header2.jpg);"></div>
     </div>
 
-    <div id="buttonDiv"></div> 
+    <div id="buttonDiv"></div>
 
     <script>
         onload = function () {
             setTimeout(function () {
                 document.querySelector('.loading').style.display = 'none';
                 document.querySelector('.main').style.display = 'block';
-            }, 2000);
+            });
         }
-        </script>
+    </script>
 </body>
 
 </html>
