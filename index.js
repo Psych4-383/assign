@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const { options } = require('nodemon/lib/config');
 const { status } = require('express/lib/response');
 const User = require('./models/user');
+const port_number = process.env.PORT || 3000;
 
 const app = express()
 
@@ -16,8 +17,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(
         (res) => {
             console.log('connected to db');
-            app.listen(port, () => {
-                console.log(`listening on port ${port}`)
+            app.listen(port_number, () => {
+                console.log(`listening on port ${port_number}`)
             })
         }
 
@@ -115,5 +116,3 @@ app.post('/logout', (req, res) => {
         res.redirect('/')
     })
 })
-
-const port = process.env.port || 3000;
