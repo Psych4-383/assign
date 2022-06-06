@@ -1,0 +1,58 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    scroll-behavior: smooth;
+}
+
+.loadingImg {
+    width: 300px;
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 1px;
+    overflow-x: hidden;
+    animation-name: swipeRight;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes swipeRight {
+    100%{
+        width: 100vw;
+    }    
+}
+
+
+.stacks {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.stack {
+    height: 50px;
+    width: 25px;
+    background-color: rgb(142, 21, 41);
+    margin: 3px;
+    animation-name: loading;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    opacity: 20%;
+    border-radius: 10px;
+}
+
+@keyframes loading {
+    0% {
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 20%;
+    }
+}

@@ -1,0 +1,28 @@
+body {
+    scroll-behavior: smooth;
+    font-family: nunito;
+}
+nav {
+    background-color: rgb(224, 117, 135);
+    padding: 30px;
+    color: white;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    height: 60vh;
+    color: rgb(142, 53, 68);
+    background-color: grey; /* add a background image */
+    background-size: cover;
+    background-position: bottom ;
+    background-repeat: no-repeat;
+
+}
+
+header h1{
+    margin: 0px;
+    font-family: Nunito;
+    padding: 30px;
+    font-size: 4rem;
+}
