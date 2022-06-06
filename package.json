@@ -19,5 +19,8 @@
   "homepage": "https://github.com/Psych4-383/assign#readme",
   "dependencies": {
     "express": "^4.18.1"
+  },
+  "engines": {
+    "node": "16.15.0"
   }
 }
