@@ -4,6 +4,8 @@ const ejs = require('ejs')
 const session = require('express-session')
 const MongoDBSession = require('connect-mongodb-session')(session)
 const mongoose = require('mongoose');
+const Assignment = require('./models/assignment')
+const Admin = require('./models/admin')
 const { options } = require('nodemon/lib/config');
 const { status } = require('express/lib/response');
 const User = require('./models/user');
@@ -88,7 +90,7 @@ app.post('/signup', async (req, res) => {
                 })
                 .catch(err => {
                     console.log("ERROR", err);
-                })  
+                })
         }
     }
     else {
@@ -110,16 +112,17 @@ app.post('/login', async (req, res) => {
     const isMatch = await bcrypt.compare(password, user[0].password)
 
     if (!isMatch) {
-        return res.redirect('/login')
+        return res.redirect('/')
     }
     else {
         req.session.isAuth = true
-        res.redirect('/dashboard')
+        req.session.user = user[0]
+        res.redirect('/student-dashboard')
     }
 })
 
-app.get('/dashboard', isAuthenticated, (req, res) => {
-    res.render('dashboard', { website: website })
+app.get('/student-dashboard', isAuthenticated, (req, res) => {
+    res.render('student-dashboard', { website: website, user: req.session.user })
 })
 
 app.post('/logout', (req, res) => {
@@ -128,3 +131,67 @@ app.post('/logout', (req, res) => {
         res.redirect('/')
     })
 })
+
+app.get('/admin-login', (req, res) => {
+    res.render('admin-login', { website: website })
+})
+
+app.post('/admin-login', async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    const user = await Admin.find({ email: email })
+    if (!user) {
+        res.redirect('/admin-login')
+    } else {
+        const isMatch = await bcrypt.compare(password, user[0].password)
+        if (!isMatch) {
+            return res.redirect('/admin-login')
+        } else {
+            req.session.isAuth = true
+            req.session.user = user[0]
+            res.redirect('/admin-dashboard')
+        }
+    }
+})
+
+app.get('/admin-dashboard', (req, res) => {
+    res.render('admin-dashboard', { website: website, user: req.session.user })
+})
+
+app.get('/admin-signup', (req, res) => {
+    res.render('admin-signup', { website: website })
+})
+
+app.post('/admin-signup', async (req, res) => {
+    const password = req.body.password.trim()
+    const email = req.body.email.trim()
+    const name = req.body.name.trim()
+    if (password != '' && email != '' && name != '') {
+        let isUser = await Admin.findOne({ email: email })
+        if (isUser) {
+            res.redirect('/admin-signup')
+        }
+        else {
+            const hashedPassword = await bcrypt.hash(password, 10)
+            const admin = new Admin({
+                name: name,
+                email: email,
+                password: hashedPassword,
+
+            })
+            await admin.save()
+
+                .then(() => {
+                    res.redirect('/admin-login')
+                    console.log('added admin')
+                })
+                .catch(err => {
+                    console.log("ERROR", err);
+                })
+        }
+    }
+    else {
+        res.redirect('/admin-signup')
+    }
+}
+)
