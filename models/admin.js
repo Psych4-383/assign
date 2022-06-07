@@ -13,8 +13,11 @@ const adminSchema = new Schema({
     password: {
         type: String,
         required: true
-
-    }
+    },
+    isAdmin: {
+        type: Boolean,
+        default: true
+    },
 }, { timestamps: true })
 
 const Admin = mongoose.model('Admin', adminSchema)

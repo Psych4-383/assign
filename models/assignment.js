@@ -19,6 +19,10 @@ const assignmentSchema = new Schema({
         type: Number,
         required: true
     },
+    assignedBy: {
+        type: String,
+        required: true
+    },
 }, { timestamps: true })
 
 const Assignment = mongoose.model('Assignment', assignmentSchema)

@@ -9,7 +9,7 @@ const Admin = require('./models/admin')
 const { options } = require('nodemon/lib/config');
 const { status } = require('express/lib/response');
 const User = require('./models/user');
-
+const crdir = __dirname
 const port_number = process.env.PORT || 3000;
 
 const website = 'Assign';
@@ -53,17 +53,38 @@ app.use(session({
     store: store,
 }))
 
-const isAuthenticated = (req, res, next) => {
+const isAuthenticatedAdminDashboard = (req, res, next) => {
     if (req.session.isAuth) {
-        next();
+        if(req.session.user.isAdmin){
+            next()
+        } else {
+            res.redirect('/student-dashboard')
+        }
     } else {
-        res.redirect('/login')
+        res.redirect('/login-choose')
+    }
+}
+
+const isAuthenticatedStudentDashboard = (req, res, next) => {
+    if (req.session.isAuth) {
+        if(!req.session.isAdmin){
+            next()
+        } else {
+            res.redirect('/admin-dashboard')
+        }
+    } else {
+        res.redirect('/login-choose')
     }
 }
 
 app.get('/', (req, res) => {
-    // console.log()
-    res.render('index', { website: website })
+    var isAdmin;
+    if(req.session.isAuth){
+        isAdmin = req.session.isAdmin
+    } else {
+        isAdmin = false
+    }
+    res.render('index', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir })
 })
 
 app.post('/signup', async (req, res) => {
@@ -99,7 +120,13 @@ app.post('/signup', async (req, res) => {
 })
 
 app.get('/signup', (req, res) => {
-    res.render('signup', { website: website })
+    var isAdmin;
+    if(req.session.isAuth){
+        isAdmin = req.session.isAdmin
+    } else {
+        isAdmin = false
+    }
+    res.render('signup', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir  })
 })
 
 app.post('/login', async (req, res) => {
@@ -117,12 +144,19 @@ app.post('/login', async (req, res) => {
     else {
         req.session.isAuth = true
         req.session.user = user[0]
+        console.log('student logged in')
         res.redirect('/student-dashboard')
     }
 })
 
-app.get('/student-dashboard', isAuthenticated, (req, res) => {
-    res.render('student-dashboard', { website: website, user: req.session.user })
+app.get('/student-dashboard', isAuthenticatedStudentDashboard, (req, res) => {
+    var isAdmin;
+    if(req.session.isAuth){
+        isAdmin = req.session.isAdmin
+    } else {
+        isAdmin = false
+    }
+    res.render('student-dashboard', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, user: req.session.user, crdir: crdir  })
 })
 
 app.post('/logout', (req, res) => {
@@ -132,8 +166,21 @@ app.post('/logout', (req, res) => {
     })
 })
 
+app.get('/logout', (req, res) => {
+    req.session.destroy((error) => {
+        if (error) throw err;
+        res.redirect('/')
+    })
+})
+
 app.get('/admin-login', (req, res) => {
-    res.render('admin-login', { website: website })
+    var isAdmin;
+    if(req.session.isAuth){
+        isAdmin = req.session.isAdmin
+    } else {
+        isAdmin = false
+    }
+    res.render('admin-login', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin , crdir: crdir })
 })
 
 app.post('/admin-login', async (req, res) => {
@@ -149,17 +196,30 @@ app.post('/admin-login', async (req, res) => {
         } else {
             req.session.isAuth = true
             req.session.user = user[0]
+            console.log('admin logged in')
             res.redirect('/admin-dashboard')
         }
     }
 })
 
-app.get('/admin-dashboard', (req, res) => {
-    res.render('admin-dashboard', { website: website, user: req.session.user })
+app.get('/admin-dashboard', isAuthenticatedAdminDashboard, (req, res) => {
+    var isAdmin;
+    if(req.session.isAuth){
+        isAdmin = req.session.isAdmin
+    } else {
+        isAdmin = false
+    }
+    res.render('admin-dashboard', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, user: req.session.user, crdir: crdir  })
 })
 
 app.get('/admin-signup', (req, res) => {
-    res.render('admin-signup', { website: website })
+    var isAdmin;
+    if(req.session.isAuth){
+        isAdmin = req.session.isAdmin
+    } else {
+        isAdmin = false
+    }
+    res.render('admin-signup', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir  })
 })
 
 app.post('/admin-signup', async (req, res) => {
@@ -195,3 +255,82 @@ app.post('/admin-signup', async (req, res) => {
     }
 }
 )
+
+
+app.get('/go-to-dashboard', (req, res) => {
+    if (req.session.isAuth){
+        if(req.session.user.isAdmin === false){
+            res.redirect('/student-dashboard')
+        } else {
+            res.redirect('/admin-dashboard')
+        }
+    } else {
+        res.redirect('/')
+    }
+})
+
+app.get('/login-choose', (req, res) => {
+    var isAdmin;
+    if(req.session.isAuth){
+        isAdmin = req.session.isAdmin
+    } else {
+        isAdmin = false
+    }
+    res.render('login-choose', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir  })
+})
+
+app.post('/create-assignment', async (req, res) => {
+    const title = req.body.title.trim()
+    const description = req.body.description.trim()
+    const dueDate = req.body.duedate
+    const assignedBy = req.session.user.name;
+    const maximumMarks = req.body.maxmarks
+    const assignment = new Assignment({
+        title: title,
+        description: description,
+        dueDate: dueDate,
+        maximumMarks: maximumMarks,
+        assignedBy: assignedBy,
+    })
+    await assignment.save()
+        .then(() => {
+            res.redirect('/admin-dashboard')
+            console.log('added assignment')
+        })
+        .catch(err => {
+            console.log("ERROR", err);
+        })
+})
+
+app.get('/create', isAuthenticatedAdminDashboard, (req, res) => {
+    var isAdmin;
+    if(req.session.isAuth){
+        isAdmin = req.session.isAdmin
+    } else {
+        isAdmin = false
+    }
+    res.render('create', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir  })
+})
+
+app.get('/view-assignments', async (req, res) => {
+    var isAdmin;
+    if(req.session.isAuth){
+        isAdmin = req.session.isAdmin
+    } else {
+        isAdmin = false
+    }
+    const assignments = await Assignment.find()
+    res.render('view-assignments', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, assignments: assignments, crdir: crdir  })
+})
+
+app.get('/assignments/:id', async (req, res) => {
+    var isAdmin;
+    if(req.session.isAuth){
+        isAdmin = req.session.isAdmin
+    } else {
+        isAdmin = false
+    }
+    const assignment = await Assignment.findById(req.params.id)
+    console.log(assignment)
+    res.render('assignment', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, assignment: assignment , crdir: crdir })
+})

@@ -1,0 +1,14 @@
+<%- include(crdir+ '/views/partials/head') %>
+<%- include(crdir+ '/views/partials/nav') %>
+<body>
+    <% for (let assignment of assignments) { %>
+    <div class="assignment">
+        <h1><%= assignment.title %></h1>
+        <p><%= assignment.description %></p>
+        <p><%= assignment.duedate %></p>
+        <p><%= assignment.maxmarks %></p>
+        <button onclick="location.href='/assignments/<%= assignment.id %>'">View</button>
+    </div>
+    <% } %>
+</body>
+<%- include(crdir+ '/views/partials/footer') %>

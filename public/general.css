@@ -7,7 +7,7 @@ body {
 
 nav {
     background-color: rgb(224, 117, 135);
-    padding: 30px;
+    padding: 10px;
     color: white;
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
@@ -17,7 +17,6 @@ header {
     height: 60vh;
     color: rgb(142, 53, 68);
     background-color: grey;
-    /* add a background image */
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
@@ -36,4 +35,37 @@ header h1 {
     font-size: 3rem;
     text-align: center;
     color: rgb(142, 21, 41);
+}
+
+nav{
+    width: 100%;
+    display: inline-block;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+
+    width: fit-content;
+}
+nav ul li{
+    padding: 5px 20px;
+}
+.nav-item{
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+nav ul li:hover, nav ul li a:hover, nav ul li a button{
+    cursor: pointer;
+    background-color: rgb(172, 88, 103);
+    color: white;
+    height: 100%;
 }

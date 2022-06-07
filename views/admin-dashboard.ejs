@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-</head>
+<%- include(crdir+ '/views/partials/head') %>
+<%- include(crdir+ '/views/partials/nav') %>
 <body>
-    
+    <button onclick="location.href='/create'">Create Assignment</button>
+    <button onclick="location.href='/view-assignments'">View Assignments</button>
 </body>
-</html>
+<%- include(crdir+ '/views/partials/footer') %>

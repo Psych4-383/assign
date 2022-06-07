@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudentDashboard | <%= website %></title>
-</head>
-
+<%- include(crdir+ '/views/partials/head') %>
+<%- include(crdir+ '/views/partials/nav') %>
 <body>
-    <H1>DASHBAORD!</H1>
+    <H1>DASHBOARD!</H1>
     <p>You are logged in successfully</p>
     <form action="/logout" method="POST">
         <button>LOGOUTTTT</button>
     </form>
 </body>
-
-</html>
+<%- include(crdir+ '/views/partials/footer') %>

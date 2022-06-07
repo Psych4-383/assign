@@ -1,0 +1,16 @@
+<%- include(crdir+ '/views/partials/head') %>
+<%- include(crdir+ '/views/partials/nav') %>
+<body>
+    <form action="/create-assignment" method="post">
+        <label for="title">Title of Assignment</label>
+        <input type="text" name="title" id="title">
+        <label for="description">Assignment description</label>
+        <input type="text" name="description" id="description">
+        <label for="duedate">Assignment due date</label>
+        <input type="date" name="duedate" id="duedate">
+        <label for="maxmarks">Maximum marks</label>
+        <input type="number" name="maxmarks" id="maxmarks">
+        <button type="submit">Create Assignment</button>
+    </form>
+</body>
+<%- include(crdir+ '/views/partials/footer') %>
