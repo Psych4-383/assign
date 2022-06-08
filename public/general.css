@@ -7,7 +7,6 @@ body {
 
 nav {
     background-color: rgb(224, 117, 135);
-    padding: 10px;
     color: white;
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
@@ -37,9 +36,12 @@ header h1 {
     color: rgb(142, 21, 41);
 }
 
-nav{
+nav {
     width: 100%;
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 nav ul {
@@ -51,10 +53,14 @@ nav ul {
 
     width: fit-content;
 }
-nav ul li{
+
+nav ul li {
     padding: 5px 20px;
+    height: 100%;
+    margin: 10px 0px 10px 20px;
 }
-.nav-item{
+
+.nav-item {
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
     background-color: transparent;
@@ -63,9 +69,36 @@ nav ul li{
     color: white;
     text-decoration: none;
 }
-nav ul li:hover, nav ul li a:hover, nav ul li a button{
+
+nav ul li:hover, nav ul li a:hover, nav ul li a button {
     cursor: pointer;
     background-color: rgb(172, 88, 103);
     color: white;
-    height: 100%;
+}
+
+footer {
+    background-color: rgb(142, 21, 41);
+    bottom: 0;
+    position: static;
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+footer ul {
+    margin-bottom: 0px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+footer ul li {
+    padding: 50px 0px;
+    flex: 1;
+}
+
+#logo-button:hover {
+    opacity: 70%;
 }

@@ -1,6 +1,6 @@
 <nav>
     <ul>
-        <button onclick="location.href = '/'">
+        <button onclick="location.href = '/'" style="margin: 10px 0px 10px 20px; padding: 0px; border: none; cursor: pointer;" id="logo-button">
             <img src="/logo.png" alt="" width="60px">
         </button>
         <% if (! isAuth ){ %>
@@ -22,8 +22,14 @@
                 <a href="/logout"><button class="nav-item">Logout</button></a>
             </li>
         <% } %>
-        <li>
+        <!-- <li>
             <a href="/about"><button class="nav-item">About</button></a>
-        </li>
+        </li> -->
     </ul>
+    <% if (isAuth) { %>
+     
+        <p style="margin-right: 20px;">
+            Logged in as <%= user.username %>
+        </p>
+    <% } %>
 </nav>

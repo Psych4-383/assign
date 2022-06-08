@@ -1,0 +1,131 @@
+<%- include(crdir+ '/views/partials/head' ) %>
+    <%- include(crdir+ '/views/partials/nav' ) %>
+        <style>
+            .assignment {
+                font-family: work sans;
+                margin: 50px;
+            }
+
+            .assignment-head {
+                padding: 50px;
+                background-color: rgb(139, 27, 44);
+                color: white;
+            }
+
+            .assignment-body {
+                padding: 50px;
+                background-color: pink;
+            }
+
+            .title-row {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .title-row-item {
+                margin-bottom: 0px;
+                margin-top: 0px;
+                letter-spacing: 2px;
+            }
+
+            #responseFile {
+                color: white;
+                text-decoration: none;
+                width: fit-content;
+            }
+
+            .file {
+                border-bottom: dashed white 2px;
+                color: white;
+                padding: 15px;
+            }
+            .response {
+                background-color: rgba(84, 36, 43, 0.556);
+                color: rgba(0, 0, 0, 0.74);
+                padding: 15px;
+                font-size: 20px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                border-radius: 30px;
+                margin: 20px 0px;
+            }
+        </style>
+
+        <body>
+            <div class="assignment">
+
+                <div class="assignment-head">
+                    <div class="title-row">
+                        <p class="title-row-item">Title</p>
+                        <p class="title-row-item" style="color: rgba(255, 255, 255, 0.642);">Assignment ID</p>
+                    </div>
+                    <div class="heading"
+                        style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                        <h1 style="font-size: 60px; margin-top: 0px;">
+                            <%= assignment.title %>
+                        </h1>
+                        <h2 style="color: rgba(255, 255, 255, 0.495);  margin-top: 0px;">
+                            <%= assignment._id %>
+                        </h2>
+                    </div>
+                </div>
+                <div class="assignment-body">
+                    <div class="title-row">
+                        <p class="title-row-item">Description</p>
+                        <p class="title-row-item">Due Date</p>
+                    </div>
+                    <div class="title-row">
+                        <p style="font-size: 25px;" class="title-row-item">
+                            <%= assignment.description %>
+                        </p>
+                        <p style="font-size: 25px;" class="title-row-item">
+                            <%= dueDate %>
+                        </p>
+                    </div>
+                    <div class="title-row" style="margin-top: 40px;">
+                        <p class="title-row-item">Maximum Marks</p>
+                        <p class="title-row-item">Assigned By</p>
+                    </div>
+                    <div class="title-row">
+                        <p style="font-size: 25px;" class="title-row-item">
+                            <%= assignment.maximumMarks %>
+                        </p>
+                        <p style="font-size: 25px;" class="title-row-item">
+                            <%= assignment.assignedBy %>
+                        </p>
+                    </div>
+                    <h1
+                        style="text-align:center; color: rgba(0, 0, 0, 0.753); font-family: work sans; letter-spacing: 3px;">
+                        VIEW RESPONSES</h1>
+                    <% responses.forEach((response, index)=> { %>
+                        <div class="response">
+                            <div class="left">
+
+                                <p>Response <%= index+1 %>.</p>
+                                <p><b>Response By - </b><i>
+                                    <%= response.submittedBy %>
+                                </i></p>
+                                <p><b>Submitted At - </b><i>
+                                    <%= response.date.toString().replace(' GMT+0530 (India Standard Time)', '' ) %>
+                                </i></p>
+                            </div>
+                            <a href="<%= uploadPath + response.response.data.toString() %>" target="_blank"
+                                id="responseFile">
+                                <div class="file">
+
+                                    <p style="margin: 0px;">File - <%= response.response.data.toString() %>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                        <% }); %>
+                </div>
+
+            </div>
+        </body>
+
+        <%- include(crdir+ '/views/partials/footer' ) %>

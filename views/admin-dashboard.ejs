@@ -1,7 +1,32 @@
 <%- include(crdir+ '/views/partials/head') %>
 <%- include(crdir+ '/views/partials/nav') %>
+
+<style>
+    #submit-button {
+        margin-top: 20px;
+        width: 50%;
+        padding: 20px 40px;
+        height: fit-content;
+        font-family: work sans;
+        letter-spacing: 3px;
+        font-size: 1.2em;
+    }
+    .left{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+
+    }
+</style>
 <body>
-    <button onclick="location.href='/create'">Create Assignment</button>
-    <button onclick="location.href='/view-assignments'">View Assignments</button>
+    <div class="container">
+        <div class="left">
+            <button id="submit-button" onclick="location.href='/create'">Create Assignments</button>
+            <button id="submit-button" onclick="location.href='/view-assignments'">View Assignments</button>
+            <button id="submit-button" onclick="location.href='/view-students'">View Students</button>
+        </div>
+        <div class="right" style="background-image: url('admindashboard.jpg');"></div>
+    </div>
 </body>
 <%- include(crdir+ '/views/partials/footer') %>

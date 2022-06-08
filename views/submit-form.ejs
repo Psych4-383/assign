@@ -1,0 +1,57 @@
+<%- include(crdir+ '/views/partials/head' ) %>
+    <%- include(crdir+ '/views/partials/nav' ) %>
+    <link rel="stylesheet" href="/assignments.css">
+        <body>
+            <div class="assignment">
+
+                <div class="assignment-head">
+                    <div class="title-row">
+                        <p class="title-row-item">Title</p>
+                        <p class="title-row-item" style="color: rgba(255, 255, 255, 0.642);">Assignment ID</p>
+                    </div>
+                    <div class="heading"
+                        style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                        <h1 style="font-size: 60px; margin-top: 0px;">
+                            <%= title %>
+                        </h1>
+                        <h2 style="color: rgba(255, 255, 255, 0.495);  margin-top: 0px;">
+                            <%= id %>
+                        </h2>
+                    </div>
+                </div>
+                <div class="assignment-body">
+                    <div class="title-row">
+                        <p class="title-row-item">Description</p>
+                        <p class="title-row-item">Due Date</p>
+                    </div>
+                    <div class="title-row">
+                        <p style="font-size: 25px;" class="title-row-item">
+                            <%= description %>
+                        </p>
+                        <p style="font-size: 25px;" class="title-row-item">
+                            <%= dueDate %>
+                        </p>
+                    </div>
+                    <div class="title-row" style="margin-top: 40px;">
+                        <p class="title-row-item">Maximum Marks</p>
+                        <p class="title-row-item">Assigned By</p>
+                    </div>
+                    <div class="title-row">
+                        <p style="font-size: 25px;" class="title-row-item">
+                            <%= maximumMarks %>
+                        </p>
+                        <p style="font-size: 25px;" class="title-row-item">
+                            <%= assignedBy %>
+                        </p>
+                    </div>
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<%= id %>">
+                        <label for="file">Upload File</label>
+                        <input type="file" name="file" id="file" style="padding: 30px;" required/>
+                        <button type="submit" id="submit-button">Submit Response</button>
+                    </form>
+                </div>
+
+            </div>
+        </body>
+        <%- include(crdir+ '/views/partials/footer' ) %>

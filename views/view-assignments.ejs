@@ -1,14 +1,104 @@
-<%- include(crdir+ '/views/partials/head') %>
-<%- include(crdir+ '/views/partials/nav') %>
-<body>
-    <% for (let assignment of assignments) { %>
-    <div class="assignment">
-        <h1><%= assignment.title %></h1>
-        <p><%= assignment.description %></p>
-        <p><%= assignment.duedate %></p>
-        <p><%= assignment.maxmarks %></p>
-        <button onclick="location.href='/assignments/<%= assignment.id %>'">View</button>
-    </div>
-    <% } %>
-</body>
-<%- include(crdir+ '/views/partials/footer') %>
+<%- include(crdir+ '/views/partials/head' ) %>
+    <%- include(crdir+ '/views/partials/nav' ) %>
+        <style>
+            .assignment {
+                background-color: rgba(142, 21, 41, 0.89);
+                color: white;
+                padding: 20px;
+                margin: 20px 40px;
+                border-radius: 20px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                font-family: work sans;
+            }
+
+            .assignments {
+                width: 75vw;
+                margin-left: 20vw;
+                background-image: linear-gradient(rgb(142, 21, 41) 33%, rgba(255, 255, 255, 0) 0%);
+                background-position: left;
+                background-size: 1px 40px;
+                background-repeat: repeat-y;
+            }
+
+            #view-button {
+                background-color: rgba(255, 255, 255, 0.134);
+                color: white;
+                padding: 10px 30px;
+                margin: 10px;
+                border-radius: 10px;
+                border: none;
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+            #view-button:hover {
+                background-color: rgb(142, 21, 41);
+            }
+
+            .sidebar {
+                font-family: work sans;
+                float: left;
+                width: fit-content;
+                padding: 30px;
+                position: sticky;
+                top: 10px;
+            }
+
+            .sidebar-item {
+                background-color: rgba(142, 21, 41, 0.379);
+                padding: 20px;
+                margin: 9px;
+            }
+
+            h4 {
+                margin: 0px;
+            }
+        </style>
+
+        <body>
+            <div class="main">
+                <div class="sidebar">
+                    <div class="sidebar-header">
+                        <h3>Assignments</h3>
+                    </div>
+                    <div class="sidebar-content">
+                        <% assignments.forEach(assignment=> { %>
+                            <a href="#<%= assignment._id %>" style="color: black; text-decoration: none;">
+                                <div class="sidebar-item" style=" background-color: rgba(142, 21, 41, 0.379);">
+                                    <h4>
+                                        <%= assignment.title %>
+                                    </h4>
+                                </div>
+                            </a>
+                            <% }) %>
+                    </div>
+                </div>
+                <div class="assignments">
+
+                    <% for (let assignment of assignments) { %>
+                        <div class="assignment" id="<%= assignment._id %>">
+                            <div>
+                                <h1>
+                                    <%= assignment.title %>
+                                </h1>
+                                <p>
+                                    <%= assignment.description %>
+                                </p>
+                                <button onclick="location.href='/assignments/<%= assignment.id %>'"
+                                    id="view-button">View</button>
+                            </div>
+                            <div>
+                                <p>Due Date: <%= convertDate(assignment.dueDate) %>
+                                </p>
+                                <p>Maximum Marks: <%= assignment.maximumMarks %>
+                                </p>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+            </div>
+        </body>
+        <%- include(crdir+ '/views/partials/footer' ) %>

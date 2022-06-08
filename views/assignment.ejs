@@ -1,9 +1,90 @@
-<%- include(crdir+ '/views/partials/head') %>
-<%- include(crdir+ '/views/partials/nav') %>
-<body>
-    <div class="assignment">
-        <h1><%= assignment.title %></h1>
-        <h1><%= assignment._id %></h1>
-    </div>
-</body>
-<%- include(crdir+ '/views/partials/footer') %>
+<%- include(crdir+ '/views/partials/head' ) %>
+    <%- include(crdir+ '/views/partials/nav' ) %>
+    <link rel="stylesheet" href="/assignments.css">
+        <style>
+            #submit-button{
+                width: max-content;
+                padding: 20px;
+                height: fit-content;
+            }
+        </style>
+
+        <body>
+            <div class="assignment">
+
+                <div class="assignment-head">
+                    <div class="title-row">
+                        <p class="title-row-item">Title</p>
+                        <p class="title-row-item" style="color: rgba(255, 255, 255, 0.642);">Assignment ID</p>
+                    </div>
+                    <div class="heading"
+                        style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                        <h1 style="font-size: 60px; margin-top: 0px;">
+                            <%= assignment.title %>
+                        </h1>
+                        <h2 style="color: rgba(255, 255, 255, 0.495);  margin-top: 0px;">
+                            <%= assignment._id %>
+                        </h2>
+                    </div>
+                </div>
+                <div class="assignment-body">
+                    <div class="title-row">
+                        <p class="title-row-item">Description</p>
+                        <p class="title-row-item">Due Date</p>
+                    </div>
+                    <div class="title-row">
+                        <p style="font-size: 25px;" class="title-row-item">
+                            <%= assignment.description %>
+                        </p>
+                        <p style="font-size: 25px;" class="title-row-item">
+                            <%= dueDate %>
+                        </p>
+                    </div>
+                    <div class="title-row" style="margin-top: 40px;">
+                        <p class="title-row-item">Maximum Marks</p>
+                        <p class="title-row-item">Assigned By</p>
+                    </div>
+                    <div class="title-row">
+                        <p style="font-size: 25px;" class="title-row-item">
+                            <%= assignment.maximumMarks %>
+                        </p>
+                        <p style="font-size: 25px;" class="title-row-item">
+                            <%= assignment.assignedBy %>
+                        </p>
+                    </div>
+                    <% if (isResponse.length != 0) { %>
+                        <form action="/view-responses" method="post">
+                            <input type="hidden" name="assignmentId" value="<%= assignment._id %>">
+                            <input type="hidden" name="username" value="<%= user.username %>">
+                            <label style="font-size: 20px; color: rgba(0, 0, 0, 0.63); ">&#9432; You have already submitted a response</label>
+                            <button type="submit" id="submit-button" style="margin-top: 20px; font-size: 15px; padding: 15px;">View Submitted Response</button>
+                        </form>
+                        <% } %> 
+                    <div class="formbuttons" style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: center">
+                        <form action="/submit-form" method="post">
+                            <input type="hidden" name="assignmentId" value="<%= assignment._id %>">
+                            <input type="hidden" name="assignedBy" value="<%= assignment.assignedBy %>">
+                            <input type="hidden" name="maximumMarks" value="<%= assignment.maximumMarks %>">
+                            <input type="hidden" name="dueDate" value="<%= dueDate %>">
+                            <input type="hidden" name="title" value="<%= assignment.title %>">
+                            <input type="hidden" name="description" value="<%= assignment.description %>">
+                            <input type="hidden" name="submittedBy" value="<%= user.username %>">
+                            <button id="submit-button">Submit Work</button>
+                        </form>
+                        <form action="/view-responses" method="post">
+                            <input type="hidden" name="assignmentId" value="<%= assignment._id %>">
+                            <input type="hidden" name="assignedBy" value="<%= assignment.assignedBy %>">
+                            <input type="hidden" name="maximumMarks" value="<%= assignment.maximumMarks %>">
+                            <input type="hidden" name="dueDate" value="<%= dueDate %>">
+                            <input type="hidden" name="title" value="<%= assignment.title %>">
+                            <input type="hidden" name="description" value="<%= assignment.description %>">
+                            <input type="hidden" name="submittedBy" value="<%= user.username %>">
+                            <input type="hidden" name="submittedOn" value="<%= Date.now() %>">
+                            <button id="submit-button">View All Responses</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </body>
+        <%- include(crdir+ '/views/partials/footer' ) %>

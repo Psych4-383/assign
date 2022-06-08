@@ -11,6 +11,9 @@
     background-color: rgba(142, 21, 41, 0.315);
     width: 50%;
     height: 100%;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
 }
 
 .container .right {

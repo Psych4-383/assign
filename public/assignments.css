@@ -1,0 +1,28 @@
+.assignment {
+    font-family: work sans;
+    margin: 50px;
+}
+
+.assignment-head {
+    padding: 50px;
+    background-color: rgb(139, 27, 44);
+    color: white;
+}
+
+.assignment-body {
+    padding: 50px;
+    background-color: pink;
+}
+
+.title-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-row-item {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    letter-spacing: 2px;
+}
