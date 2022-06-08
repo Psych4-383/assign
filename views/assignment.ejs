@@ -1,8 +1,8 @@
 <%- include(crdir+ '/views/partials/head' ) %>
     <%- include(crdir+ '/views/partials/nav' ) %>
-    <link rel="stylesheet" href="/assignments.css">
+        <link rel="stylesheet" href="/assignments.css">
         <style>
-            #submit-button{
+            #submit-button {
                 width: max-content;
                 padding: 20px;
                 height: fit-content;
@@ -52,37 +52,46 @@
                             <%= assignment.assignedBy %>
                         </p>
                     </div>
-                    <% if (isResponse.length != 0) { %>
+                    <% if (isResponse.length !=0) { %>
                         <form action="/view-responses" method="post">
                             <input type="hidden" name="assignmentId" value="<%= assignment._id %>">
                             <input type="hidden" name="username" value="<%= user.username %>">
-                            <label style="font-size: 20px; color: rgba(0, 0, 0, 0.63); ">&#9432; You have already submitted a response</label>
-                            <button type="submit" id="submit-button" style="margin-top: 20px; font-size: 15px; padding: 15px;">View Submitted Response</button>
+                            <label style="font-size: 20px; color: rgba(0, 0, 0, 0.63); ">&#9432; You have already
+                                submitted a response</label>
+                            <button type="submit" id="submit-button"
+                                style="margin-top: 20px; font-size: 15px; padding: 15px;">View Submitted
+                                Response</button>
                         </form>
-                        <% } %> 
-                    <div class="formbuttons" style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: center">
-                        <form action="/submit-form" method="post">
-                            <input type="hidden" name="assignmentId" value="<%= assignment._id %>">
-                            <input type="hidden" name="assignedBy" value="<%= assignment.assignedBy %>">
-                            <input type="hidden" name="maximumMarks" value="<%= assignment.maximumMarks %>">
-                            <input type="hidden" name="dueDate" value="<%= dueDate %>">
-                            <input type="hidden" name="title" value="<%= assignment.title %>">
-                            <input type="hidden" name="description" value="<%= assignment.description %>">
-                            <input type="hidden" name="submittedBy" value="<%= user.username %>">
-                            <button id="submit-button">Submit Work</button>
-                        </form>
-                        <form action="/view-responses" method="post">
-                            <input type="hidden" name="assignmentId" value="<%= assignment._id %>">
-                            <input type="hidden" name="assignedBy" value="<%= assignment.assignedBy %>">
-                            <input type="hidden" name="maximumMarks" value="<%= assignment.maximumMarks %>">
-                            <input type="hidden" name="dueDate" value="<%= dueDate %>">
-                            <input type="hidden" name="title" value="<%= assignment.title %>">
-                            <input type="hidden" name="description" value="<%= assignment.description %>">
-                            <input type="hidden" name="submittedBy" value="<%= user.username %>">
-                            <input type="hidden" name="submittedOn" value="<%= Date.now() %>">
-                            <button id="submit-button">View All Responses</button>
-                        </form>
-                    </div>
+                        <% } %>
+                            <div class="formbuttons"
+                                style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: center">
+                                <form action="/submit-form" method="post">
+                                    <input type="hidden" name="assignmentId" value="<%= assignment._id %>">
+                                    <input type="hidden" name="assignedBy" value="<%= assignment.assignedBy %>">
+                                    <input type="hidden" name="maximumMarks" value="<%= assignment.maximumMarks %>">
+                                    <input type="hidden" name="dueDate" value="<%= dueDate %>">
+                                    <input type="hidden" name="title" value="<%= assignment.title %>">
+                                    <input type="hidden" name="description" value="<%= assignment.description %>">
+                                    <input type="hidden" name="submittedBy" value="<%= user.username %>">
+                                    <button id="submit-button">Submit Work</button>
+                                </form>
+                                <form action="/view-responses" method="post">
+                                    <input type="hidden" name="assignmentId" value="<%= assignment._id %>">
+                                    <input type="hidden" name="assignedBy" value="<%= assignment.assignedBy %>">
+                                    <input type="hidden" name="maximumMarks" value="<%= assignment.maximumMarks %>">
+                                    <input type="hidden" name="dueDate" value="<%= dueDate %>">
+                                    <input type="hidden" name="title" value="<%= assignment.title %>">
+                                    <input type="hidden" name="description" value="<%= assignment.description %>">
+                                    <input type="hidden" name="submittedBy" value="<%= user.username %>">
+                                    <input type="hidden" name="submittedOn" value="<%= Date.now() %>">
+                                    <button id="submit-button">View All Responses</button>
+                                </form>
+                                <% if (isAdmin) { %>
+                                    <form action="/delete/<%= assignment._id %>" method="post">
+                                        <button type="submit" id="submit-button">Delete Assignment</button>
+                                    </form>
+                                <% } %>
+                            </div>
                 </div>
 
             </div>
