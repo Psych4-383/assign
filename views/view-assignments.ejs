@@ -2,30 +2,26 @@
     <%- include(crdir+ '/views/partials/nav' ) %>
         <style>
             .assignment {
-                background-color: rgba(142, 21, 41, 0.89);
+                background-color: rgba(65, 55, 107, 0.3);
                 color: white;
                 padding: 20px;
-                margin: 20px 40px;
+                margin: 0px 40px 20px;
                 border-radius: 20px;
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
-                font-family: work sans;
             }
 
             .assignments {
-                width: 75vw;
-                margin-left: 20vw;
-                background-image: linear-gradient(rgb(142, 21, 41) 33%, rgba(255, 255, 255, 0) 0%);
-                background-position: left;
-                background-size: 1px 40px;
-                background-repeat: repeat-y;
+                padding: 20px 0px 40px;
+                width: 70vw;
+                margin-left: 25vw;
             }
 
             #view-button {
-                background-color: rgba(255, 255, 255, 0.134);
-                color: white;
+                background-color: rgb(234, 171, 116);
+                color: rgb(65, 55, 107);
                 padding: 10px 30px;
                 margin: 10px;
                 border-radius: 10px;
@@ -35,45 +31,69 @@
             }
 
             #view-button:hover {
-                background-color: rgb(142, 21, 41);
+                opacity: 60%;
             }
 
             .sidebar {
-                font-family: work sans;
                 float: left;
-                width: fit-content;
+                width: 20vw;
                 padding: 30px;
                 position: sticky;
-                top: 10px;
+                top: 0px;
+                background-color: rgb(57, 59, 98);
+                height: 100vh;
             }
 
             .sidebar-item {
-                background-color: rgba(142, 21, 41, 0.379);
-                padding: 20px;
-                margin: 9px;
+                padding:  20px;
+                color: #F6F7F2;
+                font-size: 1.3rem;
+                width: fit-content;
+                transition-duration: 0.2s;
+            }
+
+            .sidebar .sidebar-content ul {
+                list-style-type: none;
+                padding: 0px;
+            }
+
+            .sidebar-item:hover {
+                list-style-type: '»';
+                margin-left: 30px;
             }
 
             h4 {
                 margin: 0px;
             }
+
+            .sidebar-header {
+                color: white;
+                font-size: 1.5em;
+                font-family: helvetica;
+                margin-bottom: 20px;
+            }
+            .assignment-details {
+                font-size: 0.9rem;
+                margin: 5px;
+            }
         </style>
 
         <body>
-            <div class="main">
+            <div>
                 <div class="sidebar">
                     <div class="sidebar-header">
-                        <h3>Assignments</h3>
+                        <h3 style="letter-spacing: 5px; font-weight: 600;">ASSIGNMENTS</h3>
                     </div>
                     <div class="sidebar-content">
-                        <% assignments.forEach(assignment=> { %>
-                            <a href="#<%= assignment._id %>" style="color: black; text-decoration: none;">
-                                <div class="sidebar-item" style=" background-color: rgba(142, 21, 41, 0.379);">
-                                    <h4>
+                        <ul>
+                            <% assignments.forEach(assignment=> { %>
+                                <a href="#<%= assignment._id %>" style="color: black; text-decoration: none;">
+                                    <li class="sidebar-item">
                                         <%= assignment.title %>
-                                    </h4>
-                                </div>
-                            </a>
-                            <% }) %>
+                                    </li>
+                                </a>
+                                <% }) %>
+                        </ul>
                     </div>
                 </div>
                 <div class="assignments">
@@ -84,16 +104,16 @@
                                 <h1>
                                     <%= assignment.title %>
                                 </h1>
-                                <p>
+                                <p class="assignment-details">
                                     <%= assignment.description %>
                                 </p>
                                 <button onclick="location.href='/assignments/<%= assignment.id %>'"
                                     id="view-button">View</button>
                             </div>
                             <div>
-                                <p>Due Date: <%= convertDate(assignment.dueDate) %>
+                                <p class="assignment-details">Due Date: <%= convertDate(assignment.dueDate) %>
                                 </p>
-                                <p>Maximum Marks: <%= assignment.maximumMarks %>
+                                <p class="assignment-details">Maximum Marks: <%= assignment.maximumMarks %>
                                 </p>
                             </div>
                         </div>

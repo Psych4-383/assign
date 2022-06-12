@@ -1,44 +1,38 @@
-<%- include(crdir+ '/views/partials/head' ) %>
-    <%- include(crdir+ '/views/partials/nav' ) %>
-        <style>
-            #submit-button {
-                padding: 20px;
-                height: fit-content;
-                width: fit-content;
-                font-family: work sans;
-                letter-spacing: 2px;
-                margin-bottom: 0px;
-            }
-            form {
-                height: fit-content;
-                width: fit-content;
-                border-bottom: 2px white solid;
-                padding-left: 90px;
-                padding-right: 90px;
-            }
-            .left{
-                display: flex;
-                flex-direction: column;
-                justify-content: space-evenly;
-                align-items: center;
-            }
-        </style>
-        <body>
-            <div class="container">
-                <div class="left">
+    <%- include(crdir+ '/views/partials/head' ) %>
+        <%- include(crdir+ '/views/partials/nav' ) %>
+            <style>
+                #submit-button {
+                    width: max-content;
+                    letter-spacing: 1.5px;
+                    padding: 5px 20px;
+                    color: rgb(15, 13, 53);
+                    margin: 10px auto;
+                }
+
+                .container {
+                    background-color: rgba(246, 247, 242, 0.492);
+                    width: max-content;
+                    height: max-content;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 30px 100px;
+                    margin: 100px auto;
+                    border-radius: 30px;
+                    }
+            </style>
+
+            <body>
+                <div class="container">
+                    <h2 class="heading-level-2" style="color: rgb(15, 13, 53); margin-bottom: 50px;">Choose Login Option</h2>
                     <form action="/" method="get">
                         <button type="submit" id="submit-button">Login as Student</button>
-                        <p>Don't have a student account? <a href="/signup">Sign Up</a> for one!</p>
-
                     </form>
+                    <p style="margin: 0px; padding: 0px;">——– OR ——–</p>
                     <form action="/admin-login" method="get">
                         <button type="submit" id="submit-button">Login as Teacher</button>
-                        <p>Don't have a teacher account? <a href="/admin-signup">Sign Up</a> for one!</p>
-
                     </form>
                 </div>
-                <div class="right" style="background-image: url('loginchoose.jpg');">
-                </div>
-            </div>
-        </body>
-        <%- include(crdir+ '/views/partials/footer' ) %>
+            </body>
+            <%- include(crdir+ '/views/partials/footer' ) %>

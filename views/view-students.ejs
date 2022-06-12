@@ -5,18 +5,24 @@
                 margin: 0 auto;
                 width: 80%;
                 padding: 20px;
-                font-family: work sans;
+                font-family: inter;
                 font-size: 30px;
             }
             .student {
-                background-color: rgb(142, 21, 41);
-                padding: 20px;
-                color: white;
-                margin: 10px;
+                background-color: RGB(57, 59, 98);
+                padding: 20px 50px;
+                color: RGB(246, 247, 242);
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
+                border-radius: 30px;
+                font-size: 1.5rem;
+                width: 40vw;
+                margin: 10px auto;
+            }
+            p{
+                margin: 0;
             }
         </style>
         <body>
@@ -27,7 +33,7 @@
                         <p style="margin-right: 40px;">
                             <%= index+1 %>. <%= student.username %>
                         </p>
-                        <p style="font-size: 20px; color: rgb(229, 116, 141);">
+                        <p style="font-size: 20px; color: rgba(246, 247, 242, 0.492)">
                             <%= student.email %>
                         </p>
                     </div>

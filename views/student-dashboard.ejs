@@ -1,49 +1,55 @@
-<%- include(crdir+ '/views/partials/head') %>
-<%- include(crdir+ '/views/partials/nav') %>
+<%- include(crdir+ '/views/partials/head' ) %>
+    <%- include(crdir+ '/views/partials/nav' ) %>
 
-<style>
-    .main {
-        margin-top: 50px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-    }
-    .head {
-        color: rgba(255, 255, 255, 0.526);
-        font-size: 15px;
-        letter-spacing: 2px;
-    }
-    .title {
-        color: rgb(22, 21, 21);
-        font-size: 25px;
-        letter-spacing: 0.7px;
-    }
-    .studentinfo {
-        background-color: rgb(201, 108, 124);
-        width: 50vw;
-        padding: 40px;
-        text-align: center;
-    }
-</style>
-<body>
-<div class="main">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Student Dashboard</h1>
-        </div>
-    </div>
-    <div class="row studentinfo">
-        <div class="col-md-12" style="letter-spacing: 3px; font-weight: lighter; font-family: work sans;">
-            <h2>Student Information</h2>
-        </div>
-        <p class="head">STUDENT NAME</p>
-        <p class="title"> <%= user.username %></p>
-        <p class="head">STUDENT EMAIL</p>
-        <p class="title"> <%= user.email %></p>
-    </div>
-    <form action="/view-assignments" method="get">
-        <button id="submit-button" style="margin-top: 20px; width: 30vw; margin-bottom: 40px;">View Assignments</button>
-    </form>
-</body>
-<%- include(crdir+ '/views/partials/footer') %>
+        <style>
+            .main {
+                /* margin-top: 50px;*/
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-evenly;
+            }
+
+            .head {
+                color: rgb(57, 59, 98);
+                font-size: 15px;
+                letter-spacing: 2px;
+            }
+
+            .title {
+                color: rgb(22, 21, 21);
+                font-size: 25px;
+                letter-spacing: 0.7px;
+            }
+
+            .studentinfo {
+                background-color: rgba(246, 247, 242, 0.492);
+                border-radius: 30px;
+                width: fit-content;
+                margin: auto;
+                padding: 40px;
+                text-align: center;
+                margin-top: 100px;
+            }
+        </style>
+        <body>
+            <div>
+                <div class="row studentinfo">
+                    <div style="letter-spacing: 3px; font-weight: lighter; font-family: helvetica; color: #0f0d35; font-size: 1.1em;">
+                        <h2>STUDENT INFORMATION</h2>
+                    </div>
+                    <p class="head">STUDENT NAME</p>
+                    <p class="title">
+                        <%= user.username %>
+                    </p>
+                    <p class="head">STUDENT EMAIL</p>
+                    <p class="title">
+                        <%= user.email %>
+                    </p>
+                </div>
+                <form action="/view-assignments" method="get">
+                    <button id="submit-button" style="margin-top: 20px; margin-bottom: 40px; width: fit-content; padding: 0px 20px;">View
+                        Assignments</button>
+                </form>
+        </body>
+        <%- include(crdir+ '/views/partials/footer' ) %>

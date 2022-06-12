@@ -228,7 +228,7 @@ app.get('/admin-dashboard', isAuthenticatedAdminDashboard, (req, res) => {
     } else {
         isAdmin = false
     }
-    res.render('admin-dashboard', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, user: req.session.user, crdir: crdir, user: req.session.user, page: 'Teacher Dashboard' })
+    res.render('admin-dashboard', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, user: req.session.user, crdir: crdir, user: req.session.user, page: 'Teacher Dashboard', user: req.session.user })
 })
 
 app.get('/admin-signup', (req, res) => {
@@ -368,7 +368,7 @@ app.post('/submit-form', async (req, res) => {
     const description = req.body.description
     const dueDate = req.body.dueDate
     const submittedBy = req.body.submittedBy
-    res.render('submit-form', { website: website, isAuth: req.session.isAuth, isAdmin: req.session.isAdmin, id: id, assignedBy: assignedBy, maximumMarks: maximumMarks, title: title, description: description, dueDate: dueDate, submittedBy: submittedBy, crdir: crdir , user: req.session.user })
+    res.render('submit-form', { website: website, isAuth: req.session.isAuth, isAdmin: req.session.isAdmin, id: id, assignedBy: assignedBy, maximumMarks: maximumMarks, title: title, description: description, dueDate: dueDate, submittedBy: submittedBy, crdir: crdir , user: req.session.user, page: 'Submit Work' })
 })
 
 
@@ -411,7 +411,7 @@ app.post('/view-responses', async (req, res) => {
     const responses = req.body.username ? await Response.find({id: req.body.assignmentId, submittedBy: req.body.username}) : await Response.find({ id: req.body.assignmentId })
     const assignment = await Assignment.findById(req.body.assignmentId)
     const dueDate = convertDate(assignment.dueDate)
-    res.render('view-responses', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, responses: responses, crdir: crdir, uploadPath: uploadPath, user: req.session.user , assignment: assignment, dueDate: dueDate, convertDate: convertDate })
+    res.render('view-responses', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, responses: responses, crdir: crdir, uploadPath: uploadPath, user: req.session.user , assignment: assignment, dueDate: dueDate, convertDate: convertDate, page: 'View Responses' })
 })
 
 function convertDate(inputDate) {

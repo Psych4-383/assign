@@ -2,6 +2,7 @@
     <%- include(crdir+ '/views/partials/nav' ) %>
     <link rel="stylesheet" href="/assignments.css">
         <body>
+            <script src="https://use.fontawesome.com/3a2eaf6206.js"></script>
             <div class="assignment">
 
                 <div class="assignment-head">
@@ -46,8 +47,10 @@
                     </div>
                     <form action="/upload" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<%= id %>">
-                        <label for="file">Upload File</label>
-                        <input type="file" name="file" id="file" style="padding: 30px;" required/>
+                        <label for="file" style="font-size: 1.5rem;">Upload File 
+                            <i class="fa fa-file"></i>
+                        </label>
+                            <input type="file" name="file" id="file" style="padding: 30px; color: RGB(15, 13, 53);" required/>
                         <button type="submit" id="submit-button">Submit Response</button>
                     </form>
                 </div>

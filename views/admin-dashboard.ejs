@@ -1,32 +1,78 @@
-<%- include(crdir+ '/views/partials/head') %>
-<%- include(crdir+ '/views/partials/nav') %>
+<%- include(crdir+ '/views/partials/head' ) %>
+    <%- include(crdir+ '/views/partials/nav' ) %>
 
-<style>
-    #submit-button {
-        margin-top: 20px;
-        width: 50%;
-        padding: 20px 40px;
-        height: fit-content;
-        font-family: work sans;
-        letter-spacing: 3px;
-        font-size: 1.2em;
-    }
-    .left{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
+        <style>
+            #submit-button {
+                margin-top: 20px;
+                width: max-content;
+                padding: 4px 20px;
+                font-family: inter;
+                font-size: 1.2em;
+            }
 
-    }
-</style>
-<body>
-    <div class="container">
-        <div class="left">
-            <button id="submit-button" onclick="location.href='/create'">Create Assignments</button>
-            <button id="submit-button" onclick="location.href='/view-assignments'">View Assignments</button>
-            <button id="submit-button" onclick="location.href='/view-students'">View Students</button>
-        </div>
-        <div class="right" style="background-image: url('admindashboard.jpg');"></div>
-    </div>
-</body>
-<%- include(crdir+ '/views/partials/footer') %>
+            .page {
+                background-color: RGBA(246, 247, 242, 0.492);
+                height: max-content;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: max-content;
+                margin: 10vh auto;
+                padding: 20px 100px;
+                border-radius: 30px;
+            }
+
+            .main {
+                /* margin-top: 50px;*/
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-evenly;
+            }
+
+            .head {
+                color: rgb(57, 59, 98);
+                font-size: 15px;
+                letter-spacing: 2px;
+                margin-bottom: 0px;
+            }
+
+            .title {
+                color: rgb(22, 21, 21);
+                font-size: 25px;
+                letter-spacing: 0.7px;
+                margin-top: 0px;
+                margin-bottom: 30px;
+            }
+
+            .teacherinfo {
+                width: fit-content;
+                margin: auto;
+                padding: 20px 40px;
+                text-align: center;
+            }
+        </style>
+
+        <body>
+            <div class="page">
+                <div class="row teacherinfo">
+                    <div
+                        style="letter-spacing: 3px; font-weight: lighter; font-family: helvetica; color: #0f0d35; font-size: 1.1em;">
+                        <h2>TEACHER INFORMATION</h2>
+                    </div>
+                    <p class="head">TEACHER NAME</p>
+                    <p class="title">
+                        <%= user.username %>
+                    </p>
+                    <p class="head">TEACHER EMAIL</p>
+                    <p class="title">
+                        <%= user.email %>
+                    </p>
+                </div>
+                <button id="submit-button" onclick="location.href='/create'">Create Assignments</button>
+                <button id="submit-button" onclick="location.href='/view-assignments'">View Assignments</button>
+                <button id="submit-button" onclick="location.href='/view-students'">View Students</button>
+            </div>
+        </body>
+        <%- include(crdir+ '/views/partials/footer' ) %>

@@ -1,21 +1,22 @@
 <%- include(crdir+ '/views/partials/head') %>
 <%- include(crdir+ '/views/partials/nav') %>
 <body>
-    <h1 class="heading-level-1">Teacher Login</h1>
-    <div class="container">
-        <div class="left">
-            <form method="post" action="/admin-login">
-                <label for="name">Email</label>
-                <input type="email" placeholder="Enter Email" name="email" id="email" required>
-                <label for="password">Password</label>
-                <input type="password" placeholder="Enter Password" name="password" id="password" required>
-                <button type="submit" id="submit-button">Login</button>
-                <sup>&#9432; You may be redirected back to this page if details are incorrect/incomplete</sup>
-                <p>Don't have an account? <a href="/admin-signup">Sign Up</a>!</p>
-            </form>
+    <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+        <div class="parent"
+            style="background-image: url('1.jpg'); background-size: cover; border-radius: 50%; height: 110vh; width: 110vh; position: absolute; top: 0px; z-index: 3;">
+            <div class="main"
+                style="background-color: rgba(57, 59, 98, 0.53); border-radius: 50%; height: 110vh; width: 110vh;">
+                <div class="content">
+                    <h1 class="heading-level-1">ASSIGN</h1>
+                    <h2 class="heading-level-2">Teacher Login</h2>
+                    <form method="post" action="/admin-login">
+                        <input type="email" placeholder="Enter Email" name="email" id="email" required>
+                        <input type="password" placeholder="Enter Password" name="password" id="password" required>
+                        <button type="submit" id="submit-button">Login</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="right" style="background-image: url(/header.jpg);"></div>
     </div>
-
 </body>
 <%- include(crdir+ '/views/partials/footer') %>

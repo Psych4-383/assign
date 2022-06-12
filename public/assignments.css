@@ -1,17 +1,17 @@
 .assignment {
-    font-family: work sans;
+    font-family: inter;
     margin: 50px;
+    color: RGB(246, 247, 242);
 }
 
 .assignment-head {
     padding: 50px;
-    background-color: rgb(139, 27, 44);
-    color: white;
+    background-color: rgba(246, 247, 242, 0.492);
 }
 
 .assignment-body {
     padding: 50px;
-    background-color: pink;
+    background-color: RGB(57, 59, 98);
 }
 
 .title-row {
@@ -25,4 +25,5 @@
     margin-bottom: 0px;
     margin-top: 0px;
     letter-spacing: 2px;
+    font-size: 0.78rem;
 }

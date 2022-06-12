@@ -1,33 +1,27 @@
-<%- include(crdir+ '/views/partials/head') %>
-<%- include(crdir+ '/views/partials/nav') %>
+<%- include(crdir+ '/views/partials/head' ) %>
+    <%- include(crdir+ '/views/partials/nav' ) %>
 
-<body>
-    <h1 class="heading-level-1">Login Page</h1>
-    <div class="container">
-        <div class="left">
-            <form action="/login" method="post">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Enter Email" required>
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Enter Password" required>
-                <button id="submit-button">Login</button>
-                <sup>&#9432; You may be redirected back to this page if credentials are incorrect</sup>
-                <p>Don't have an account? <a href="/signup">Sign Up</a> for one!</p>
-            </form>
-        </div>
-        <div class="right" style="background-image: url(/header2.jpg);"></div>
-    </div>
+        <body>
+            <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                <div class="parent"
+                    style="background-image: url('1.jpg'); background-size: cover; border-radius: 50%; height: 110vh; width: 110vh; position: absolute; top: 0px; z-index: 3;">
+                    <div class="main"
+                        style="background-color: rgba(57, 59, 98, 0.53); border-radius: 50%; height: 110vh; width: 110vh;">
+                        <div class="content">
+                            <h1 class="heading-level-1">ASSIGN</h1>
+                            <form action="/login" method="post">
+                                <input type="email" name="email" id="email" placeholder="Enter Email" required>
+                                <input type="password" name="password" id="password" placeholder="Enter Password"
+                                    required>
+                                <div class="buttons">
+                                    <button id="submit-button">Login</button>
+                                    <button id="submit-button" onclick="location.href='/signup'">Sign Up</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
 
-    <div id="buttonDiv"></div>
-    
-    <script>
-        onload = function () {
-            setTimeout(function () {
-                document.querySelector('.loading').style.display = 'none';
-                document.querySelector('.main').style.display = 'block';
-            });
-        }
-        </script>
-</body>
-
-<%- include(crdir+ '/views/partials/footer') %>
+        <%- include(crdir+ '/views/partials/footer' ) %>

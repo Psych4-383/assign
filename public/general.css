@@ -1,12 +1,18 @@
 body {
     scroll-behavior: smooth;
-    font-family: nunito;
+    font-family: inter;
     margin: 0px;
     padding: 0px;
+    background-color: #0f0d35;
+}
+
+html{
+    padding: 0px;
+    margin: 0px;
 }
 
 nav {
-    background-color: rgb(224, 117, 135);
+    background-color: #41376B;
     color: white;
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
@@ -30,10 +36,20 @@ header h1 {
 }
 
 .heading-level-1 {
-    font-family: nunito;
-    font-size: 3rem;
+    font-family: helvetica;
+    font-size: 5rem;
+    font-weight: 100;
     text-align: center;
-    color: rgb(142, 21, 41);
+    color: rgb(234, 171, 116);
+    margin-bottom: 10px;
+}
+.heading-level-2 {
+    font-weight: 100;
+    font-family: helvetica;
+    font-size: 2.5rem;
+    text-align: center;
+    color: #F6F7F2;
+    margin: 0px;
 }
 
 nav {
@@ -42,6 +58,7 @@ nav {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    z-index: 5;
 }
 
 nav ul {
@@ -70,19 +87,31 @@ nav ul li {
     text-decoration: none;
 }
 
-nav ul li:hover, nav ul li a:hover, nav ul li a button {
+nav ul li:hover, nav ul li a:hover, nav ul li a button:hover {
     cursor: pointer;
-    background-color: rgb(172, 88, 103);
-    color: white;
+    color: #0f0d35;
 }
 
 footer {
-    background-color: rgb(142, 21, 41);
+    background-color: #41376B;
     bottom: 0;
-    position: static;
+    position: fixed;
+    bottom: -110px;
     color: white;
     width: 100%;
     text-align: center;
+    z-index: 5;
+}
+
+@keyframes footerUp {
+    100%{
+        bottom: 0;
+    }
+}
+
+footer:hover{
+    animation: footerUp 0.3s ease-in-out;
+    animation-fill-mode: forwards;
 }
 
 footer ul {
@@ -95,7 +124,7 @@ footer ul {
 }
 
 footer ul li {
-    padding: 50px 0px;
+    padding: 10px 0px;
     flex: 1;
 }
 

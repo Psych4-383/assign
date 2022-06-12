@@ -1,35 +1,6 @@
 <%- include(crdir+ '/views/partials/head' ) %>
     <%- include(crdir+ '/views/partials/nav' ) %>
         <style>
-            .assignment {
-                font-family: work sans;
-                margin: 50px;
-            }
-
-            .assignment-head {
-                padding: 50px;
-                background-color: rgb(139, 27, 44);
-                color: white;
-            }
-
-            .assignment-body {
-                padding: 50px;
-                background-color: pink;
-            }
-
-            .title-row {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            .title-row-item {
-                margin-bottom: 0px;
-                margin-top: 0px;
-                letter-spacing: 2px;
-            }
-
             #responseFile {
                 color: white;
                 text-decoration: none;
@@ -39,12 +10,12 @@
             .file {
                 border-bottom: dashed white 2px;
                 color: white;
-                padding: 15px;
+                padding: 7px;
             }
             .response {
-                background-color: rgba(84, 36, 43, 0.556);
-                color: rgba(0, 0, 0, 0.74);
-                padding: 15px;
+                background-color: RGB(15, 13, 53);
+                color: RGB(246, 247, 242);
+                padding: 15px 30px;
                 font-size: 20px;
                 display: flex;
                 flex-direction: row;
@@ -54,7 +25,7 @@
                 margin: 20px 0px;
             }
         </style>
-
+        <link rel="stylesheet" href="/assignments.css">
         <body>
             <div class="assignment">
 
@@ -65,7 +36,7 @@
                     </div>
                     <div class="heading"
                         style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                        <h1 style="font-size: 60px; margin-top: 0px;">
+                        <h1 style="font-size: 60px; margin-top: 0px;" class="heading-level-1">
                             <%= assignment.title %>
                         </h1>
                         <h2 style="color: rgba(255, 255, 255, 0.495);  margin-top: 0px;">
@@ -99,13 +70,13 @@
                         </p>
                     </div>
                     <h1
-                        style="text-align:center; color: rgba(0, 0, 0, 0.753); font-family: work sans; letter-spacing: 3px;">
+                        style="text-align:center; color: rgba(0, 0, 0, 0.753); font-family: inter; letter-spacing: 3px;">
                         VIEW RESPONSES</h1>
                     <% responses.forEach((response, index)=> { %>
                         <div class="response">
                             <div class="left">
 
-                                <p>Response <%= index+1 %>.</p>
+                                <p style="letter-spacing: 2px;">Response <%= index+1 %>.</p>
                                 <p><b>Response By - </b><i>
                                     <%= response.submittedBy %>
                                 </i></p>
@@ -116,7 +87,6 @@
                             <a href="<%= uploadPath + response.response.data.toString() %>" target="_blank"
                                 id="responseFile">
                                 <div class="file">
-
                                     <p style="margin: 0px;">File - <%= response.response.data.toString() %>
                                     </p>
                                 </div>
