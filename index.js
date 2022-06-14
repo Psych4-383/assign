@@ -95,14 +95,19 @@ const isAuthenticatedStudentDashboard = (req, res, next) => {
     }
 }
 
-app.get('/', (req, res) => {
+function authAdmin(req) {
     var isAdmin;
     if (req.session.isAuth) {
         isAdmin = req.session.isAdmin
     } else {
         isAdmin = false
     }
-    res.render('index', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir , user: req.session.user, page: 'Home' })
+    return isAdmin
+}
+
+app.get('/', (req, res) => {
+    isAdmin = authAdmin(req)
+    res.render('index', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir, user: req.session.user, page: 'Home' })
 })
 
 app.post('/signup', async (req, res) => {
@@ -138,13 +143,8 @@ app.post('/signup', async (req, res) => {
 })
 
 app.get('/signup', (req, res) => {
-    var isAdmin;
-    if (req.session.isAuth) {
-        isAdmin = req.session.isAdmin
-    } else {
-        isAdmin = false
-    }
-    res.render('signup', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir, user: req.session.user , page: 'Signup' })
+    isAdmin = authAdmin(req)
+    res.render('signup', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir, user: req.session.user, page: 'Signup' })
 })
 
 app.post('/login', async (req, res) => {
@@ -168,12 +168,7 @@ app.post('/login', async (req, res) => {
 })
 
 app.get('/student-dashboard', isAuthenticatedStudentDashboard, (req, res) => {
-    var isAdmin;
-    if (req.session.isAuth) {
-        isAdmin = req.session.isAdmin
-    } else {
-        isAdmin = false
-    }
+    isAdmin = authAdmin(req)
     res.render('student-dashboard', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir, user: req.session.user, page: 'Student Dashboard' })
 })
 
@@ -192,13 +187,8 @@ app.get('/logout', (req, res) => {
 })
 
 app.get('/admin-login', (req, res) => {
-    var isAdmin;
-    if (req.session.isAuth) {
-        isAdmin = req.session.isAdmin
-    } else {
-        isAdmin = false
-    }
-    res.render('admin-login', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir, user: req.session.user , page: 'Teacher Login' })
+    isAdmin = authAdmin(req)
+    res.render('admin-login', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir, user: req.session.user, page: 'Teacher Login' })
 })
 
 app.post('/admin-login', async (req, res) => {
@@ -222,23 +212,15 @@ app.post('/admin-login', async (req, res) => {
 })
 
 app.get('/admin-dashboard', isAuthenticatedAdminDashboard, (req, res) => {
-    var isAdmin;
-    if (req.session.isAuth) {
-        isAdmin = req.session.isAdmin
-    } else {
-        isAdmin = false
-    }
+    isAdmin = authAdmin(req)
+
     res.render('admin-dashboard', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, user: req.session.user, crdir: crdir, user: req.session.user, page: 'Teacher Dashboard', user: req.session.user })
 })
 
 app.get('/admin-signup', (req, res) => {
-    var isAdmin;
-    if (req.session.isAuth) {
-        isAdmin = req.session.isAdmin
-    } else {
-        isAdmin = false
-    }
-    res.render('admin-signup', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir, user: req.session.user , page: 'Teacher Signup' })
+    isAdmin = authAdmin(req)
+
+    res.render('admin-signup', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir, user: req.session.user, page: 'Teacher Signup' })
 })
 
 app.post('/admin-signup', async (req, res) => {
@@ -289,13 +271,8 @@ app.get('/go-to-dashboard', (req, res) => {
 })
 
 app.get('/login-choose', (req, res) => {
-    var isAdmin;
-    if (req.session.isAuth) {
-        isAdmin = req.session.isAdmin
-    } else {
-        isAdmin = false
-    }
-    res.render('login-choose', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir , user: req.session.user , page: 'Login' })
+    isAdmin = authAdmin(req)
+    res.render('login-choose', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir, user: req.session.user, page: 'Login' })
 })
 
 app.post('/create-assignment', async (req, res) => {
@@ -323,33 +300,20 @@ app.post('/create-assignment', async (req, res) => {
 })
 
 app.get('/create', isAuthenticatedAdminDashboard, (req, res) => {
-    var isAdmin;
-    if (req.session.isAuth) {
-        isAdmin = req.session.isAdmin
-    } else {
-        isAdmin = false
-    }
-    res.render('create', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir , user: req.session.user , page: 'Create Assignment' })
+    isAdmin = authAdmin(req)
+    res.render('create', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, crdir: crdir, user: req.session.user, page: 'Create Assignment' })
 })
 
 app.get('/view-assignments', async (req, res) => {
-    var isAdmin;
-    if (req.session.isAuth) {
-        isAdmin = req.session.isAdmin
-    } else {
-        isAdmin = false
-    }
+    isAdmin = authAdmin(req)
+
     const assignments = await Assignment.find()
-    res.render('view-assignments', { page: 'View Assignments', website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, assignments: assignments, crdir: crdir, convertDate: convertDate , user: req.session.user })
+    res.render('view-assignments', { page: 'View Assignments', website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, assignments: assignments, crdir: crdir, convertDate: convertDate, user: req.session.user })
 })
 
 app.get('/assignments/:id', async (req, res) => {
-    var isAdmin;
-    if (req.session.isAuth) {
-        isAdmin = req.session.isAdmin
-    } else {
-        isAdmin = false
-    }
+    isAdmin = authAdmin(req)
+
     id = req.params.id
     const assignment = await Assignment.findById(id)
     const isResponse = await Response.find({ id: id, submittedBy: req.session.user.username })
@@ -368,7 +332,7 @@ app.post('/submit-form', async (req, res) => {
     const description = req.body.description
     const dueDate = req.body.dueDate
     const submittedBy = req.body.submittedBy
-    res.render('submit-form', { website: website, isAuth: req.session.isAuth, isAdmin: req.session.isAdmin, id: id, assignedBy: assignedBy, maximumMarks: maximumMarks, title: title, description: description, dueDate: dueDate, submittedBy: submittedBy, crdir: crdir , user: req.session.user, page: 'Submit Work' })
+    res.render('submit-form', { website: website, isAuth: req.session.isAuth, isAdmin: req.session.isAdmin, id: id, assignedBy: assignedBy, maximumMarks: maximumMarks, title: title, description: description, dueDate: dueDate, submittedBy: submittedBy, crdir: crdir, user: req.session.user, page: 'Submit Work' })
 })
 
 
@@ -400,18 +364,12 @@ app.post('/upload', upload.single('file'), (req, res) => {
 })
 
 app.post('/view-responses', async (req, res) => {
-    var isAdmin;
-    if (req.session.isAuth) {
-        isAdmin = req.session.isAdmin
-    }
-    else {
-        isAdmin = false
-    }
+    isAdmin = authAdmin(req)
     const uploadPath = './uploads/'
-    const responses = req.body.username ? await Response.find({id: req.body.assignmentId, submittedBy: req.body.username}) : await Response.find({ id: req.body.assignmentId })
+    const responses = req.body.username ? await Response.find({ id: req.body.assignmentId, submittedBy: req.body.username }) : await Response.find({ id: req.body.assignmentId })
     const assignment = await Assignment.findById(req.body.assignmentId)
     const dueDate = convertDate(assignment.dueDate)
-    res.render('view-responses', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, responses: responses, crdir: crdir, uploadPath: uploadPath, user: req.session.user , assignment: assignment, dueDate: dueDate, convertDate: convertDate, page: 'View Responses' })
+    res.render('view-responses', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, responses: responses, crdir: crdir, uploadPath: uploadPath, user: req.session.user, assignment: assignment, dueDate: dueDate, convertDate: convertDate, page: 'View Responses' })
 })
 
 function convertDate(inputDate) {
@@ -425,35 +383,32 @@ function convertDate(inputDate) {
 }
 
 app.get('/view-students', async (req, res) => {
-    var isAdmin;
-    if (req.session.isAuth) {
-        isAdmin = req.session.isAdmin
-
+    isAdmin = authAdmin(req)
+    if (isAdmin) {
+        const students = await User.find()
+        res.render('view-students', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, students: students, crdir: crdir, user: req.session.user, page: 'View Students' })
     } else {
-        isAdmin = false
+        res.redirect('/login-choose')
     }
-    const students = await User.find()
-    res.render('view-students', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, students: students, crdir: crdir, user: req.session.user , page: 'View Students' })
 })
 
 app.post('/view-students', async (req, res) => {
-    var isAdmin;
-    if (req.session.isAuth) {
-        isAdmin = req.session.isAdmin
-    
+    isAdmin = authAdmin(req)
+    if (isAdmin) {
+        const filter = req.body.filter
+        const results = await User.find()
+        const students = results.filter(student => {
+            return student.username.toLowerCase().includes(filter.toLowerCase()) || student.email.toLowerCase().includes(filter.toLowerCase())
+        })
+        res.render('view-students', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, students: students, crdir: crdir, user: req.session.user, page: 'View Students' })
+
     } else {
-        isAdmin = false
+        res.redirect('/login-choose')
     }
-    const filter = req.body.filter
-    const results = await User.find()
-    const students = results.filter(student => {
-        return student.username.toLowerCase().includes(filter.toLowerCase()) || student.email.toLowerCase().includes(filter.toLowerCase())
-    })
-    res.render('view-students', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, students: students, crdir: crdir, user: req.session.user , page: 'View Students' })
 }
 )
 
-function deleteAssignment(id){
+function deleteAssignment(id) {
     Assignment.findByIdAndDelete(id)
         .then(() => {
             console.log('deleted assignment')
@@ -464,7 +419,13 @@ function deleteAssignment(id){
 }
 
 app.post('/delete/:id', async (req, res) => {
-    id = req.params.id
-    deleteAssignment(id)
-    res.redirect('/view-assignments')
+    isAdmin = authAdmin(req)
+    if (isAdmin) {
+        id = req.params.id
+        deleteAssignment(id)
+        res.redirect('/view-assignments')
+    }
+    else {
+        res.redirect('/go-to-dashboard')
+    }
 })

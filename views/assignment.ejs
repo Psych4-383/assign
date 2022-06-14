@@ -145,11 +145,11 @@
                                 <button id="submit-button">View All Responses</button>
                             </form>
                         </div>
+                        <% if (isAdmin) { %>
                         <div style="width: fit-content;">
                             <button id="submit-button" class="delete-button">Delete Assignment</button>
                         </div>
                     </div>
-                    <% if (isAdmin) { %>
                         <div class="popup">
                             <div class="modalcontent">
                                 <h2 class="heading-level-1" style="font-size: 2.5rem;">Delete Confirmation</h2>
