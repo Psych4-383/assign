@@ -12,6 +12,7 @@
                 color: white;
                 padding: 7px;
             }
+
             .response {
                 background-color: RGB(15, 13, 53);
                 color: RGB(246, 247, 242);
@@ -24,8 +25,23 @@
                 border-radius: 30px;
                 margin: 20px 0px;
             }
+
+            #search {
+                width: 40%;
+                padding: 10px;
+                font-size: 1.5rem;
+                display: flex;
+                justify-content: space-between;
+                flex-direction: row;
+                margin: auto;
+            }
+
+            .searchButton {
+                width: fit-content;
+            }
         </style>
         <link rel="stylesheet" href="/assignments.css">
+
         <body>
             <div class="assignment">
 
@@ -72,17 +88,22 @@
                     <h1 class="heading-level-1"
                         style="text-align:center; font-family: inter; letter-spacing: 3px; font-size: 2.5rem;">
                         VIEW RESPONSES</h1>
+                    <form id="search" action="/view-responses-by" method="POST">
+                        <input type="hidden" name="id" value="<%= assignment._id %>">
+                        <input type="text" id="filter" name="filter" placeholder="Filter by Student Name">
+                        <button class="searchButton" id="submit-button" type="submit">Search</button>
+                    </form>
                     <% responses.forEach((response, index)=> { %>
                         <div class="response">
                             <div class="left">
 
                                 <p style="letter-spacing: 2px;">Response <%= index+1 %>.</p>
                                 <p><b>Response By - </b><i>
-                                    <%= response.submittedBy %>
-                                </i></p>
+                                        <%= response.submittedBy %>
+                                    </i></p>
                                 <p><b>Submitted At - </b><i>
-                                    <%= response.date.toString().replace(' GMT+0530 (India Standard Time)', '' ) %>
-                                </i></p>
+                                        <%= response.date.toString().split(' GMT')[0] %>
+                                    </i></p>
                             </div>
                             <a href="<%= uploadPath + response.response.data.toString() %>" target="_blank"
                                 id="responseFile">
@@ -92,9 +113,11 @@
                                 </div>
                             </a>
                         </div>
-                        <% }); %>
+                    <% }); %>
+                    <% if (responses.length==0) { %>
+                        <p style="text-align: center; font-size: 2rem;">No Responses Yet</p>
+                    <% } %>
                 </div>
-
             </div>
         </body>
 

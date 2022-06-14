@@ -429,3 +429,20 @@ app.post('/delete/:id', async (req, res) => {
         res.redirect('/go-to-dashboard')
     }
 })
+
+app.post('/view-responses-by', async (req, res) => {
+    console.log('reached this far')
+    isAdmin = authAdmin(req)
+    const uploadPath = './uploads/'
+    console.log(req.body.filter, req.body.id)
+    var responses = await Response.find({id: req.body.id})
+    responses = responses.filter(response => {
+        return response.submittedBy.toLowerCase().includes(req.body.filter.toLowerCase())
+    }
+    )
+    console.log(responses)
+    const assignment = await Assignment.findById(req.body.id)
+    const dueDate = convertDate(assignment.dueDate)
+    res.render('view-responses', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, responses: responses, crdir: crdir, uploadPath: uploadPath, user: req.session.user, assignment: assignment, dueDate: dueDate, convertDate: convertDate, page: 'View Responses' })
+}
+)
