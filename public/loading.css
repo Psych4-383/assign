@@ -2,6 +2,7 @@ body {
     margin: 0px;
     padding: 0px;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 .loadingImg {
@@ -9,16 +10,19 @@ body {
 }
 
 .loading {
+    overflow-y: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    width: 1px;
+    height: 100%;
+    width: 0px;
     overflow-x: hidden;
     animation-name: swipeRight;
     animation-duration: 1s;
     animation-fill-mode: forwards;
+    z-index: 100;
+    position: absolute;
 }
 
 @keyframes swipeRight {
@@ -26,7 +30,7 @@ body {
         width: 100vw;
     }    
 }
-
+/* 
 
 .stacks {
     display: flex;
@@ -55,4 +59,4 @@ body {
     100% {
         opacity: 20%;
     }
-}
+} */

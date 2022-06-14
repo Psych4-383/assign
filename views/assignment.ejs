@@ -6,9 +6,74 @@
                 width: max-content;
                 padding: 1px 20px;
             }
+
             form {
                 width: fit-content;
-                margin: auto;
+                margin: 20px 40px 20px 0px;
+            }
+
+            .popup {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 0%;
+                height: 100%;
+                overflow: hidden;
+                background-color: rgb(0, 0, 0);
+                background-color: rgba(0, 0, 0, 0.4);
+                animation-duration: 0.4s;
+                animation-fill-mode: forwards;
+            }
+
+            @keyframes slide {
+                0% {
+                    width: 0%;
+                }
+
+                100% {
+                    width: 100%;
+                }
+            }
+
+            .modalcontent {
+                background-color: RGB(15, 13, 53);
+                width: 50vw;
+                height: 40vh;
+                margin: 30vh auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                border-radius: 30px;
+            }
+
+            .forms {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .forms form {
+                margin: 20px;
+            }
+
+            #buttons {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                width: max-content;
+                margin: 0px;
+            }
+
+            #inline {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
             }
         </style>
 
@@ -55,46 +120,91 @@
                             <%= assignment.assignedBy %>
                         </p>
                     </div>
-                    <!-- <div class="formbuttons"
-                    style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: center; width: max-content;"> -->
-                    <form action="/submit-form" method="post">
-                        <input type="hidden" name="assignmentId" value="<%= assignment._id %>">
-                        <input type="hidden" name="assignedBy" value="<%= assignment.assignedBy %>">
-                        <input type="hidden" name="maximumMarks" value="<%= assignment.maximumMarks %>">
-                        <input type="hidden" name="dueDate" value="<%= dueDate %>">
-                        <input type="hidden" name="title" value="<%= assignment.title %>">
-                        <input type="hidden" name="description" value="<%= assignment.description %>">
-                        <input type="hidden" name="submittedBy" value="<%= user.username %>">
-                        <button id="submit-button">Submit Work</button>
-                    </form>
-                    <form action="/view-responses" method="post">
-                        <input type="hidden" name="assignmentId" value="<%= assignment._id %>">
-                        <input type="hidden" name="assignedBy" value="<%= assignment.assignedBy %>">
-                        <input type="hidden" name="maximumMarks" value="<%= assignment.maximumMarks %>">
-                        <input type="hidden" name="dueDate" value="<%= dueDate %>">
-                        <input type="hidden" name="title" value="<%= assignment.title %>">
-                        <input type="hidden" name="description" value="<%= assignment.description %>">
-                        <input type="hidden" name="submittedBy" value="<%= user.username %>">
-                        <input type="hidden" name="submittedOn" value="<%= Date.now() %>">
-                        <button id="submit-button">View All Responses</button>
-                    </form>
+                    <div id="inline">
+
+                        <div id="buttons">
+                            <form action="/submit-form" method="post">
+                                <input type="hidden" name="assignmentId" value="<%= assignment._id %>">
+                                <input type="hidden" name="assignedBy" value="<%= assignment.assignedBy %>">
+                                <input type="hidden" name="maximumMarks" value="<%= assignment.maximumMarks %>">
+                                <input type="hidden" name="dueDate" value="<%= dueDate %>">
+                                <input type="hidden" name="title" value="<%= assignment.title %>">
+                                <input type="hidden" name="description" value="<%= assignment.description %>">
+                                <input type="hidden" name="submittedBy" value="<%= user.username %>">
+                                <button id="submit-button">Submit Work</button>
+                            </form>
+                            <form action="/view-responses" method="post">
+                                <input type="hidden" name="assignmentId" value="<%= assignment._id %>">
+                                <input type="hidden" name="assignedBy" value="<%= assignment.assignedBy %>">
+                                <input type="hidden" name="maximumMarks" value="<%= assignment.maximumMarks %>">
+                                <input type="hidden" name="dueDate" value="<%= dueDate %>">
+                                <input type="hidden" name="title" value="<%= assignment.title %>">
+                                <input type="hidden" name="description" value="<%= assignment.description %>">
+                                <input type="hidden" name="submittedBy" value="<%= user.username %>">
+                                <input type="hidden" name="submittedOn" value="<%= Date.now() %>">
+                                <button id="submit-button">View All Responses</button>
+                            </form>
+                        </div>
+                        <div style="width: fit-content;">
+                            <button id="submit-button" class="delete-button">Delete Assignment</button>
+                        </div>
+                    </div>
                     <% if (isAdmin) { %>
-                        <form action="/delete/<%= assignment._id %>" method="post">
-                            <button type="submit" id="submit-button">Delete Assignment</button>
-                        </form>
+                        <div class="popup">
+                            <div class="modalcontent">
+                                <h2 class="heading-level-1" style="font-size: 2.5rem;">Delete Confirmation</h2>
+                                <p style="text-align: center;">Are you sure you want to delete this assignment?</p>
+                                <div class="forms">
+                                    <form>
+                                        <button id="submit-button" class="no">No</button>
+                                    </form>
+                                    <form action="/delete/<%= assignment._id %>" method="post" >
+                                        <button type="submit" id="submit-button" id="delete">Delete Assignment</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         <% } %>
-                    <!-- </div> -->
-                    <% if (isResponse.length !=0) { %>
-                        <form action="/view-responses" method="post" style="display: flex; flex-direction: row; ">
-                            <input type="hidden" name="assignmentId" value="<%= assignment._id %>">
-                            <input type="hidden" name="username" value="<%= user.username %>">
-                            <label style="font-size: 13px; margin-top: 0px;">&#9432; You have already
-                                submitted a response.</label>
-                            <button type="submit" style="border: none; background-color: transparent; cursor: pointer;padding: 0px 20px; color: rgb(15, 13, 53); font-size: 13px; text-decoration: underline;">View Response</button>
-                        </form>
-                        <% } %>
+                            <% if (isResponse.length !=0) { %>
+                                <form action="/view-responses" method="post"
+                                    style="display: flex; flex-direction: row; ">
+                                    <input type="hidden" name="assignmentId" value="<%= assignment._id %>">
+                                    <input type="hidden" name="username" value="<%= user.username %>">
+                                    <label style="font-size: 13px; margin-top: 0px;">&#9432; You have already
+                                        submitted a response.
+                                    </label>
+                                    <button type="submit"
+                                        style="border: none; background-color: transparent; cursor: pointer;padding: 0px 20px; color: rgb(15, 13, 53); font-size: 13px; text-decoration: underline;">View
+                                        Response
+                                    </button>
+                                </form>
+                                <% } %>
                 </div>
 
+
+                <script>
+                    var modal = document.getElementsByClassName('popup')[0]
+                    var button = document.getElementsByClassName('delete-button')[0]
+                    var close = document.getElementsByClassName('no')[0]
+                    button.onclick = function () {
+                        modal.style.display = "block";
+                        modal.style.animationName = "slide";
+                    }
+
+                    button.addEventListener('click', function () {
+                        close.focus()
+                    })
+
+                    close.onclick = function () {
+                        modal.style.display = "none";
+                    }
+
+                    window.onclick = function (event) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    }
+                </script>
             </div>
         </body>
         <%- include(crdir+ '/views/partials/footer' ) %>

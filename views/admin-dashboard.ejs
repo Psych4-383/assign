@@ -3,28 +3,27 @@
 
         <style>
             #submit-button {
-                margin-top: 20px;
-                width: max-content;
-                padding: 4px 20px;
+                /* width: 100%; */
+                padding: 10px 20px;
                 font-family: inter;
                 font-size: 1.2em;
+                height: max-content;
             }
 
             .page {
-                background-color: RGBA(246, 247, 242, 0.492);
+                background-color: rgba(246, 247, 242, 0.492);
                 height: max-content;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                width: max-content;
+                width: 50%;
                 margin: 10vh auto;
-                padding: 20px 100px;
+                padding: 20px 40px;
                 border-radius: 30px;
             }
 
             .main {
-                /* margin-top: 50px;*/
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -33,17 +32,15 @@
 
             .head {
                 color: rgb(57, 59, 98);
-                font-size: 15px;
-                letter-spacing: 2px;
-                margin-bottom: 0px;
+                font-size: 25px;
+                font-weight: 600;
+                margin-right: 10px;                
             }
 
             .title {
                 color: rgb(22, 21, 21);
                 font-size: 25px;
                 letter-spacing: 0.7px;
-                margin-top: 0px;
-                margin-bottom: 30px;
             }
 
             .teacherinfo {
@@ -51,28 +48,51 @@
                 margin: auto;
                 padding: 20px 40px;
                 text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            .row {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .buttons {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
             }
         </style>
 
         <body>
             <div class="page">
-                <div class="row teacherinfo">
+                <div class="teacherinfo">
                     <div
                         style="letter-spacing: 3px; font-weight: lighter; font-family: helvetica; color: #0f0d35; font-size: 1.1em;">
                         <h2>TEACHER INFORMATION</h2>
                     </div>
-                    <p class="head">TEACHER NAME</p>
-                    <p class="title">
-                        <%= user.username %>
-                    </p>
-                    <p class="head">TEACHER EMAIL</p>
-                    <p class="title">
-                        <%= user.email %>
-                    </p>
+                    <div class="row">
+                        <p class="head">NAME: </p>
+                        <p class="title">
+                            <%= user.username %>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <p class="head">EMAIL: </p>
+                        <p class="title">
+                            <%= user.email %>
+                        </p>
+                    </div>
                 </div>
-                <button id="submit-button" onclick="location.href='/create'">Create Assignments</button>
-                <button id="submit-button" onclick="location.href='/view-assignments'">View Assignments</button>
-                <button id="submit-button" onclick="location.href='/view-students'">View Students</button>
+                <div class="buttons">
+                    <button id="submit-button" onclick="location.href='/create'">Create Assignments</button>
+                    <button id="submit-button" onclick="location.href='/view-assignments'">View Assignments</button>
+                    <button id="submit-button" onclick="location.href='/view-students'">View Students</button>
+                </div>
             </div>
         </body>
         <%- include(crdir+ '/views/partials/footer' ) %>

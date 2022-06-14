@@ -1,13 +1,14 @@
 <%- include(crdir+ '/views/partials/head' ) %>
     <%- include(crdir+ '/views/partials/nav' ) %>
         <style>
-            .students{
+            .students {
                 margin: 0 auto;
                 width: 80%;
                 padding: 20px;
                 font-family: inter;
                 font-size: 30px;
             }
+
             .student {
                 background-color: RGB(57, 59, 98);
                 padding: 20px 50px;
@@ -21,23 +22,57 @@
                 width: 40vw;
                 margin: 10px auto;
             }
-            p{
+
+            p {
                 margin: 0;
             }
+
+            #search {
+                width: 40%;
+                padding: 10px;
+                font-size: 1.5rem;
+                display: flex;
+                justify-content: space-between;
+                flex-direction: row;
+                margin: auto;
+            }
+
+            .searchButton {
+                width: fit-content;
+            }
         </style>
+
         <body>
             <h1 class="heading-level-1">Student List</h1>
+            <form id="search" method="POST">
+                <input type="text" id="filter" name="filter" placeholder="Filter Students">
+                <button class="searchButton" id="submit-button">Search</button>
+            </form>
             <div class="students">
                 <% students.forEach((student, index)=> { %>
-                    <div class="student">
-                        <p style="margin-right: 40px;">
-                            <%= index+1 %>. <%= student.username %>
-                        </p>
-                        <p style="font-size: 20px; color: rgba(246, 247, 242, 0.492)">
-                            <%= student.email %>
-                        </p>
-                    </div>
-                    <% }) %>
+                        <div class="student">
+                            <p style="margin-right: 40px;">
+                                <%= index+1 %>. <%= student.username %>
+                            </p>
+                            <p style="font-size: 20px; color: rgba(246, 247, 242, 0.492)">
+                                <%= student.email %>
+                            </p>
+                        </div>
+                <% }) %>
+                <% if (students.length == 0) { %>
+                    <p class="heading-level-2">No students found</p>
+                <% } %>
             </div>
+            <script>
+                var filter;
+                var filterInput = document.getElementById('filter');
+                var form = document.getElementById('search');
+                var searchButton = document.getElementsByClassName('searchButton')[0];
+                searchButton.addEventListener('click', function (){
+                    filter = filterInput.value;
+                    form.action = '/view-students?filter=' + filter
+                    searchButton.type = 'submit'
+                })
+            </script>
         </body>
         <%- include(crdir+ '/views/partials/footer' ) %>

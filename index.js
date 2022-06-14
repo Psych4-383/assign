@@ -436,6 +436,23 @@ app.get('/view-students', async (req, res) => {
     res.render('view-students', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, students: students, crdir: crdir, user: req.session.user , page: 'View Students' })
 })
 
+app.post('/view-students', async (req, res) => {
+    var isAdmin;
+    if (req.session.isAuth) {
+        isAdmin = req.session.isAdmin
+    
+    } else {
+        isAdmin = false
+    }
+    const filter = req.body.filter
+    const results = await User.find()
+    const students = results.filter(student => {
+        return student.username.toLowerCase().includes(filter.toLowerCase()) || student.email.toLowerCase().includes(filter.toLowerCase())
+    })
+    res.render('view-students', { website: website, isAuth: req.session.isAuth, isAdmin: isAdmin, students: students, crdir: crdir, user: req.session.user , page: 'View Students' })
+}
+)
+
 function deleteAssignment(id){
     Assignment.findByIdAndDelete(id)
         .then(() => {
