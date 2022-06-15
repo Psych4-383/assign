@@ -31,7 +31,7 @@ const website = 'Assign';
 
 const app = express()
 
-const dbURI = 'mongodb+srv://bisht:326ce21s@cluster0.glnxr.mongodb.net/test?retryWrites=true&w=majority';
+const dbURI = 'mongodb+srv://bisht:326ce21s@cluster0.glnxr.mongodb.net/assign?retryWrites=true&w=majority';
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(
