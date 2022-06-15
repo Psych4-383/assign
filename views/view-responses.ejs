@@ -43,6 +43,7 @@
         <link rel="stylesheet" href="/assignments.css">
 
         <body>
+            <%- include(crdir+ '/views/partials/buttons' ) %>
             <div class="assignment">
 
                 <div class="assignment-head">
@@ -96,7 +97,6 @@
                     <% responses.forEach((response, index)=> { %>
                         <div class="response">
                             <div class="left">
-
                                 <p style="letter-spacing: 2px;">Response <%= index+1 %>.</p>
                                 <p><b>Response By - </b><i>
                                         <%= response.submittedBy %>

@@ -1,5 +1,6 @@
 <%- include(crdir+ '/views/partials/head' ) %>
     <%- include(crdir+ '/views/partials/nav' ) %>
+
         <style>
             .assignment {
                 background-color: rgba(65, 55, 107, 0.3);
@@ -96,6 +97,8 @@
                         </ul>
                     </div>
                 </div>
+                <%- include(crdir+ '/views/partials/buttons' ) %>
+
                 <div class="assignments">
 
                     <% for (let assignment of assignments) { %>

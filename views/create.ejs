@@ -1,38 +1,40 @@
-<%- include(crdir+ '/views/partials/head') %>
-<%- include(crdir+ '/views/partials/nav') %>
-<body>
-    <style>
-        form{
-            color: rgb(246, 247, 242);
-            font-family: inter;
-        }
+<%- include(crdir+ '/views/partials/head' ) %>
+    <%- include(crdir+ '/views/partials/nav' ) %>
 
-        form textarea {
-            background-color: rgba(246, 247, 242, 0.474);
-            border-radius: 30px;
-            margin-top: 30px;
-            font-family: inter;
-            font-size: 1rem;
-            resize: none;
-            padding: 30px;
-        }
+        <body>
+            <style>
+                form {
+                    color: rgb(246, 247, 242);
+                    font-family: inter;
+                }
 
-        #submit-button{
-            width: fit-content;
-            padding: 4px 30px;
-        }
-    </style>
-    <h1 class="heading-level-1" style="font-size: 2rem;">Create New Assignment</h1>
-    <form action="/create-assignment" method="post">
-        <label for="title">Title of Assignment</label>
-        <input type="text" name="title" id="title" required>
-        <label for="description">Assignment description</label>
-        <textarea rows="20" cols="70" name="description" id="description" required></textarea>
-        <label for="duedate">Assignment due date</label>
-        <input type="date" name="duedate" id="duedate" required>
-        <label for="maxmarks">Maximum marks</label>
-        <input type="number" name="maxmarks" id="maxmarks" required>
-        <button type="submit" id="submit-button">Create Assignment</button>
-    </form>
-</body>
-<%- include(crdir+ '/views/partials/footer') %>
+                form textarea {
+                    background-color: rgba(246, 247, 242, 0.474);
+                    border-radius: 30px;
+                    margin-top: 30px;
+                    font-family: inter;
+                    font-size: 1rem;
+                    resize: none;
+                    padding: 30px;
+                }
+
+                #submit-button {
+                    width: fit-content;
+                    padding: 4px 30px;
+                }
+            </style>
+            <%- include(crdir+ '/views/partials/buttons' ) %>
+                <h1 class="heading-level-1" style="font-size: 2rem;">Create New Assignment</h1>
+                <form action="/create-assignment" method="post">
+                    <label for="title">Title of Assignment</label>
+                    <input type="text" name="title" id="title" required>
+                    <label for="description">Assignment description</label>
+                    <textarea rows="20" cols="70" name="description" id="description" required></textarea>
+                    <label for="duedate">Assignment due date</label>
+                    <input type="date" name="duedate" id="duedate" required>
+                    <label for="maxmarks">Maximum marks</label>
+                    <input type="number" name="maxmarks" id="maxmarks" required>
+                    <button type="submit" id="submit-button">Create Assignment</button>
+                </form>
+        </body>
+        <%- include(crdir+ '/views/partials/footer' ) %>

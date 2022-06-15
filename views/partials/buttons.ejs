@@ -1,0 +1,47 @@
+<script src="https://kit.fontawesome.com/56fcb4db86.js" crossorigin="anonymous"></script>
+
+<div class="quickAccess">
+    <button id="submit-button" onclick="history.back()" class="one"><img src="/back.png" alt="" width="26px"></button>
+    <button id="submit-button" onclick="location.href='/go-to-dashboard'" class="two"><img src="/home.png" alt="" width="26px"></button>
+</div>
+
+<style>
+    .quickAccess button {
+        width: fit-content !important;
+        z-index: 100;
+        padding: 10px 12px !important;
+        margin: 6px 0px !important;
+    }
+    
+    .quickAccess{
+        padding: 20px;
+        position: absolute;
+        top: 60;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: flex-end;
+    }   
+</style>
+
+<script>
+    var one = document.getElementsByClassName("one")[0];
+    var two = document.getElementsByClassName("two")[0];
+    one.addEventListener("mouseover" , function(){
+        console.log("one");
+        one.innerHTML = 'Back';
+    });
+
+    one.addEventListener("mouseout" , function(){
+        one.innerHTML = '<img src="/back.png" alt="" width="26px">';
+    });
+    two.addEventListener("mouseover" , function(){
+        console.log("two");
+        two.innerHTML = 'Home';
+    });
+
+    two.addEventListener("mouseout" , function(){
+        two.innerHTML = '<img src="/home.png" alt="" width="26px">';
+    });
+</script>
